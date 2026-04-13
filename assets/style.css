@@ -1,18 +1,16 @@
 /* Kool Energy Technology — Custom CSS */
 
-/* Smooth page transitions via HTMX */
-.htmx-settling {
+/* Smooth page transitions via HTMX hx-boost */
+body.htmx-settling {
   opacity: 0;
-  transform: translateY(8px);
-  transition: opacity 0.25s ease, transform 0.25s ease;
 }
-.htmx-settling.htmx-settle {
-  opacity: 1;
-  transform: translateY(0);
+body {
+  transition: opacity 0.25s ease;
 }
 
 /* Service card hover lift */
 .service-card {
+  box-shadow: 0 0 0 rgba(0, 0, 0, 0);
   transition: box-shadow 0.2s ease, transform 0.2s ease;
 }
 .service-card:hover {
