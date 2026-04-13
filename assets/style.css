@@ -1,0 +1,47 @@
+/* Kool Energy Technology — Custom CSS */
+
+/* Smooth page transitions via HTMX */
+.htmx-settling {
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+.htmx-settling.htmx-settle {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Service card hover lift */
+.service-card {
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+.service-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+}
+
+/* Section overline label */
+.section-overline {
+  display: block;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #D42B2B;
+  margin-bottom: 0.5rem;
+}
+
+/* Instagram placeholder tiles */
+.insta-tile {
+  background: #1A3A5C;
+  aspect-ratio: 1 / 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.5rem;
+  transition: opacity 0.2s ease;
+}
+.insta-tile:hover {
+  opacity: 0.8;
+}
