@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Request Service — Kool Energy Technology</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;800&family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'navy-900': '#0D1B2A',
+            'navy-700': '#1A3A5C',
+            'blue-600': '#1E5FC2',
+            'crimson':  '#D42B2B',
+          },
+          fontFamily: {
+            heading: ['Montserrat', 'sans-serif'],
+            body:    ['Inter', 'sans-serif'],
+          },
+        },
+      },
+    }
+  </script>
+  <script src="https://unpkg.com/htmx.org@1.9.10" defer></script>
+  <script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+  <link rel="stylesheet" href="assets/style.css" />
+</head>
+<body class="bg-white font-body" hx-boost="true">
+
+  <!-- NAVBAR -->
+  <nav class="sticky top-0 z-50 bg-navy-900 shadow-lg" x-data="{ open: false }">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+      <a href="index.html" class="flex-shrink-0">
+        <img src="assets/logo.png" alt="Kool Energy Technology" class="h-12 w-auto" />
+      </a>
+      <div class="hidden md:flex items-center gap-8">
+        <a href="index.html"           class="text-white font-body font-semibold hover:text-blue-400 transition-colors">Home</a>
+        <a href="services.html"        class="text-white font-body font-semibold hover:text-blue-400 transition-colors">Services</a>
+        <a href="about.html"           class="text-white font-body font-semibold hover:text-blue-400 transition-colors">About</a>
+        <a href="instagram.html"       class="text-white font-body font-semibold hover:text-blue-400 transition-colors">Instagram</a>
+        <a href="service-request.html" class="bg-crimson text-white font-body font-bold px-5 py-2 rounded-full hover:bg-red-700 transition-colors">Request Service</a>
+      </div>
+      <button class="md:hidden text-white focus:outline-none" @click="open = !open" aria-label="Toggle menu">
+        <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path x-show="!open" stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/>
+          <path x-show="open"  stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
+        </svg>
+      </button>
+    </div>
+    <div x-show="open" x-transition class="md:hidden bg-navy-700 px-6 py-4 flex flex-col gap-4">
+      <a href="index.html"           @click="open=false" class="text-white font-body font-semibold">Home</a>
+      <a href="services.html"        @click="open=false" class="text-white font-body font-semibold">Services</a>
+      <a href="about.html"           @click="open=false" class="text-white font-body font-semibold">About</a>
+      <a href="instagram.html"       @click="open=false" class="text-white font-body font-semibold">Instagram</a>
+      <a href="service-request.html" @click="open=false" class="bg-crimson text-white font-body font-bold px-5 py-2 rounded-full text-center">Request Service</a>
+    </div>
+  </nav>
+
+  <!-- PAGE HERO -->
+  <section class="bg-navy-900 py-20 text-center">
+    <div class="max-w-3xl mx-auto px-6">
+      <span class="section-overline">Get Started</span>
+      <h1 class="font-heading font-extrabold text-white text-5xl mb-4">Request Service</h1>
+      <p class="font-body text-gray-300 text-lg">
+        Fill out the form below and our team will be in touch to confirm your appointment and next steps.
+      </p>
+    </div>
+  </section>
+
+  <!-- JOBBER FORM EMBED -->
+  <section class="bg-gray-50 py-16">
+    <div class="max-w-4xl mx-auto px-6">
+      <iframe
+        src="https://clienthub.getjobber.com/hubs/0459b149-dc28-42b0-a7ec-b0002f0e24e4/public/requests/191500/new"
+        title="Kool Energy Technology — Service Request"
+        class="w-full rounded-xl shadow-lg border-0"
+        style="min-height: 860px;"
+        loading="lazy"
+      ></iframe>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="bg-navy-900 text-white py-12">
+    <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div>
+        <img src="assets/logo.png" alt="Kool Energy Technology" class="h-12 w-auto mb-4" />
+        <p class="font-body text-gray-400 text-sm">Commercial HVAC solutions for South Florida businesses. Licensed, insured, and built for commercial clients.</p>
+      </div>
+      <div>
+        <h4 class="font-heading font-bold text-crimson uppercase tracking-widest text-sm mb-4">Quick Links</h4>
+        <ul class="space-y-2 font-body text-gray-300 text-sm">
+          <li><a href="index.html"           class="hover:text-white transition-colors">Home</a></li>
+          <li><a href="services.html"        class="hover:text-white transition-colors">Services</a></li>
+          <li><a href="about.html"           class="hover:text-white transition-colors">About</a></li>
+          <li><a href="instagram.html"       class="hover:text-white transition-colors">Instagram</a></li>
+          <li><a href="service-request.html" class="hover:text-white transition-colors">Request Service</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="font-heading font-bold text-crimson uppercase tracking-widest text-sm mb-4">Contact</h4>
+        <ul class="space-y-2 font-body text-gray-300 text-sm">
+          <li>South Florida Service Area</li>
+          <li><a href="https://www.instagram.com/koolenergytechnology/" target="_blank" class="hover:text-white transition-colors">@koolenergytechnology</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="max-w-7xl mx-auto px-6 mt-10 pt-6 border-t border-navy-700 text-center font-body text-gray-500 text-sm">
+      &copy; 2026 Kool Energy Technology. All rights reserved.
+    </div>
+  </footer>
+
+</body>
+</html>
