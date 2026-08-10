@@ -3,243 +3,255 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Kool Energy Technology — Commercial HVAC</title>
+  <title>Kool Energy Technology — Commercial HVAC New York</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;800&family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
       theme: {
         extend: {
-          colors: {
-            'navy-900': '#0D1B2A',
-            'navy-700': '#1A3A5C',
-            'blue-600': '#1E5FC2',
-            'crimson':  '#D42B2B',
-          },
           fontFamily: {
-            heading: ['Montserrat', 'sans-serif'],
-            body:    ['Inter', 'sans-serif'],
-          },
-        },
-      },
+            display: ['"Manrope"', 'sans-serif'],
+            sans:    ['"Inter"',   'sans-serif'],
+          }
+        }
+      }
     }
   </script>
-  <script src="https://unpkg.com/htmx.org@1.9.10" defer></script>
-  <script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+  <script defer src="https://unpkg.com/htmx.org@1.9.10"></script>
+  <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
   <link rel="stylesheet" href="assets/style.css" />
 </head>
-<body class="bg-white font-body" hx-boost="true">
+<body class="font-sans" hx-boost="true">
 
-  <!-- NAVBAR -->
-  <nav class="sticky top-0 z-50 bg-navy-900 shadow-lg" x-data="{ open: false }">
-    <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-      <a href="index.html" class="flex-shrink-0">
-        <img src="assets/logo.png" alt="Kool Energy Technology" class="h-12 w-auto" />
+  <!-- NAV -->
+  <header class="nav-bar" x-data="{ open: false }">
+    <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+      <a href="index.html">
+        <img src="assets/logo.png" alt="Kool Energy Technology" class="h-9 w-auto" />
       </a>
-      <div class="hidden md:flex items-center gap-8">
-        <a href="index.html"           class="text-white font-body font-semibold hover:text-blue-400 transition-colors">Home</a>
-        <a href="services.html"        class="text-white font-body font-semibold hover:text-blue-400 transition-colors">Services</a>
-        <a href="about.html"           class="text-white font-body font-semibold hover:text-blue-400 transition-colors">About</a>
-        <a href="instagram.html"       class="text-white font-body font-semibold hover:text-blue-400 transition-colors">Instagram</a>
-        <a href="service-request.html" class="bg-crimson text-white font-body font-bold px-5 py-2 rounded-full hover:bg-red-700 transition-colors">Request Service</a>
-      </div>
-      <button class="md:hidden text-white focus:outline-none" @click="open = !open" aria-label="Toggle menu">
-        <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-          <path x-show="!open" stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/>
-          <path x-show="open"  stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
+      <nav class="hidden md:flex items-center gap-8">
+        <a href="index.html" class="nav-link active">Home</a>
+        <a href="services.html" class="nav-link">Services</a>
+        <a href="about.html" class="nav-link">About</a>
+        <a href="instagram.html" class="nav-link">Instagram</a>
+        <a href="service-request.html" class="btn-cta">Request Service</a>
+      </nav>
+      <button class="md:hidden p-2" style="color:var(--on-surface-variant);" @click="open = !open" aria-label="Menu">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path x-show="!open" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+          <path x-show="open" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
         </svg>
       </button>
     </div>
-    <div x-show="open" x-transition class="md:hidden bg-navy-700 px-6 py-4 flex flex-col gap-4">
-      <a href="index.html"           @click="open=false" class="text-white font-body font-semibold">Home</a>
-      <a href="services.html"        @click="open=false" class="text-white font-body font-semibold">Services</a>
-      <a href="about.html"           @click="open=false" class="text-white font-body font-semibold">About</a>
-      <a href="instagram.html"       @click="open=false" class="text-white font-body font-semibold">Instagram</a>
-      <a href="service-request.html" @click="open=false" class="bg-crimson text-white font-body font-bold px-5 py-2 rounded-full text-center">Request Service</a>
+    <div x-show="open" x-transition style="background:var(--surface-low);" class="md:hidden px-6 py-4 space-y-3">
+      <a href="index.html" class="block nav-link py-2">Home</a>
+      <a href="services.html" class="block nav-link py-2">Services</a>
+      <a href="about.html" class="block nav-link py-2">About</a>
+      <a href="instagram.html" class="block nav-link py-2">Instagram</a>
+      <a href="service-request.html" class="btn-cta block text-center mt-4">Request Service</a>
     </div>
-  </nav>
+  </header>
 
   <!-- HERO -->
-  <section class="bg-navy-900 relative overflow-hidden min-h-[90vh] flex items-center">
-    <!-- Diagonal accent graphic -->
-    <div class="absolute inset-0 overflow-hidden pointer-events-none">
-      <div class="absolute -right-24 -top-24 w-96 h-96 bg-blue-600 opacity-10 rounded-full"></div>
-      <div class="absolute -left-16 bottom-0 w-72 h-72 bg-crimson opacity-10 rounded-full"></div>
-    </div>
-    <div class="max-w-7xl mx-auto px-6 py-24 relative z-10">
-      <span class="section-overline">South Florida's Commercial HVAC Experts</span>
-      <h1 class="font-heading font-extrabold text-white text-5xl md:text-6xl leading-tight max-w-3xl mb-6">
-        Commercial HVAC Solutions<br/>
-        <span class="text-crimson">Built for Business.</span>
-      </h1>
-      <p class="font-body text-gray-300 text-xl max-w-xl mb-10">
-        Kool Energy Technology delivers reliable heating, cooling, and air quality systems for commercial facilities across South Florida. We keep your business running — not just comfortable.
-      </p>
-      <a
-        href="service-request.html"
-        class="inline-block bg-crimson text-white font-heading font-bold text-lg px-8 py-4 rounded-full hover:bg-red-700 transition-colors"
-      >
-        Request Service
-      </a>
-    </div>
-  </section>
+  <section class="hero-section">
+    <div class="hero-grid-bg"></div>
+    <div class="hero-glow"></div>
+    <!-- Right-side hero image — ductwork / industrial HVAC -->
+    <div class="hero-img-panel" style="background-image:url('assets/pexels-adrien-olichon-1257089-2464420.jpg');"></div>
+    <div class="hero-inner max-w-7xl mx-auto px-6 w-full relative z-10">
+      <div class="hero-copy">
+        <!-- Logo as hero identity mark -->
+        <img class="hero-logo" src="assets/logo.png" alt="Kool Energy Technology" />
+        <!-- Slogan — small, tracked, subdued -->
+        <p class="hero-slogan font-display">
+          Precision Cooling for Business
+        </p>
+        <p class="hero-lead">
+          Industrial-grade HVAC solutions for commercial properties, office buildings, and facilities across New York. Licensed. Insured. Built for business.
+        </p>
+        <div class="hero-actions flex flex-wrap gap-4">
+          <a href="service-request.html" class="btn-cta">Request Service</a>
+          <a href="services.html" class="btn-ghost">Our Services</a>
+        </div>
 
-  <!-- SERVICES TEASER -->
-  <section class="bg-gray-50 py-24">
-    <div class="max-w-7xl mx-auto px-6">
-      <div class="text-center mb-14">
-        <span class="section-overline">What We Do</span>
-        <h2 class="font-heading font-extrabold text-navy-900 text-4xl">Commercial HVAC Services</h2>
-      </div>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-        <!-- Card: AC -->
-        <div class="service-card bg-white rounded-xl p-8 border-t-4 border-crimson shadow-sm">
-          <div class="text-crimson mb-4">
-            <svg class="w-10 h-10" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364-.707.707M6.343 17.657l-.707.707M17.657 17.657l-.707-.707M6.343 6.343l-.707-.707M12 6a6 6 0 1 0 0 12A6 6 0 0 0 12 6z"/>
-            </svg>
+        <!-- Stats — Blue-on-Blue layering per DESIGN.md -->
+        <div class="hero-stats">
+          <div class="hero-stat">
+            <div class="hero-stat-num font-display">20+</div>
+            <div class="hero-stat-label">Years Experience</div>
           </div>
-          <h3 class="font-heading font-bold text-navy-900 text-xl mb-3">Air Conditioning</h3>
-          <p class="font-body text-gray-600 mb-6">Commercial A/C repair, replacement, and storage facility maintenance for businesses of all sizes.</p>
-          <a href="services.html" class="font-body font-semibold text-crimson hover:underline">Learn More →</a>
-        </div>
-        <!-- Card: Heating -->
-        <div class="service-card bg-white rounded-xl p-8 border-t-4 border-navy-700 shadow-sm">
-          <div class="text-navy-700 mb-4">
-            <svg class="w-10 h-10" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M15.362 5.214A8.252 8.252 0 0 1 12 21 8.25 8.25 0 0 1 6.038 7.047 8.287 8.287 0 0 0 9 9.601a8.983 8.983 0 0 1 3.361-6.867 8.21 8.21 0 0 0 3 2.48z"/>
-            </svg>
+          <div class="hero-stat">
+            <div class="hero-stat-num font-display">500+</div>
+            <div class="hero-stat-label">Commercial Clients</div>
           </div>
-          <h3 class="font-heading font-bold text-navy-900 text-xl mb-3">Heating Systems</h3>
-          <p class="font-body text-gray-600 mb-6">Furnace repair and replacement, heating system maintenance for commercial and industrial properties.</p>
-          <a href="services.html" class="font-body font-semibold text-crimson hover:underline">Learn More →</a>
-        </div>
-        <!-- Card: Preventative Maintenance -->
-        <div class="service-card bg-white rounded-xl p-8 border-t-4 border-blue-600 shadow-sm">
-          <div class="text-blue-600 mb-4">
-            <svg class="w-10 h-10" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M11.42 15.17 17.25 21A2.652 2.652 0 0 0 21 17.25l-5.877-5.877M11.42 15.17l2.496-3.03c.317-.384.74-.626 1.208-.766M11.42 15.17l-4.655 5.653a2.548 2.548 0 1 1-3.586-3.586l5.653-4.655m5.8-6.176.518-.313a3.75 3.75 0 0 0-.54-6.539l-1.962 1.962"/>
-            </svg>
+          <div class="hero-stat">
+            <div class="hero-stat-num font-display">24/7</div>
+            <div class="hero-stat-label">Emergency Support</div>
           </div>
-          <h3 class="font-heading font-bold text-navy-900 text-xl mb-3">Preventative Maintenance</h3>
-          <p class="font-body text-gray-600 mb-6">Comprehensive maintenance plans with regular inspections, cleaning, and tune-ups to maximize uptime.</p>
-          <a href="services.html" class="font-body font-semibold text-crimson hover:underline">Learn More →</a>
-        </div>
-      </div>
-      <div class="text-center mt-12">
-        <a href="services.html" class="inline-block border-2 border-navy-900 text-navy-900 font-heading font-bold px-8 py-3 rounded-full hover:bg-navy-900 hover:text-white transition-colors">
-          View All Services
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- WHY KOOL ENERGY -->
-  <section class="bg-navy-900 py-24">
-    <div class="max-w-7xl mx-auto px-6">
-      <div class="text-center mb-14">
-        <span class="section-overline">Why Us</span>
-        <h2 class="font-heading font-extrabold text-white text-4xl">Built for Commercial Clients</h2>
-      </div>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-10 text-center">
-        <div>
-          <div class="flex items-center justify-center w-16 h-16 bg-crimson rounded-full mx-auto mb-5">
-            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z"/>
-            </svg>
-          </div>
-          <h3 class="font-heading font-bold text-white text-xl mb-3">Licensed &amp; Insured</h3>
-          <p class="font-body text-gray-400">Fully certified technicians. Every job is backed by proper licensing and insurance — protecting your business.</p>
-        </div>
-        <div>
-          <div class="flex items-center justify-center w-16 h-16 bg-crimson rounded-full mx-auto mb-5">
-            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 21h16.5M4.5 3h15M5.25 3v18m13.5-18v18M9 6.75h1.5m-1.5 3h1.5m-1.5 3h1.5m3-6H15m-1.5 3H15m-1.5 3H15M9 21v-3.375c0-.621.504-1.125 1.125-1.125h3.75c.621 0 1.125.504 1.125 1.125V21"/>
-            </svg>
-          </div>
-          <h3 class="font-heading font-bold text-white text-xl mb-3">Commercial Specialists</h3>
-          <p class="font-body text-gray-400">We focus on commercial facilities — offices, warehouses, retail, and industrial — not one-off residential calls.</p>
-        </div>
-        <div>
-          <div class="flex items-center justify-center w-16 h-16 bg-crimson rounded-full mx-auto mb-5">
-            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0z"/>
-            </svg>
-          </div>
-          <h3 class="font-heading font-bold text-white text-xl mb-3">Fast Response</h3>
-          <p class="font-body text-gray-400">Downtime costs your business money. We prioritize quick dispatch and efficient service to get you back online fast.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- INSTAGRAM STRIP -->
-  <section class="bg-white py-24">
+  <!-- SERVICES OVERVIEW -->
+  <section style="background:var(--surface-low);" class="py-24">
     <div class="max-w-7xl mx-auto px-6">
-      <div class="text-center mb-10">
-        <span class="section-overline">Follow Along</span>
-        <h2 class="font-heading font-extrabold text-navy-900 text-4xl mb-4">See Our Work on Instagram</h2>
-        <p class="font-body text-gray-600">Behind-the-scenes looks at our commercial HVAC installations and service calls.</p>
+      <div class="mb-14">
+        <span class="overline-label">What We Do</span>
+        <h2 class="font-display font-bold" style="font-size:clamp(2rem,5vw,3rem);color:var(--on-surface);letter-spacing:-0.02em;">COMMERCIAL HVAC SERVICES</h2>
       </div>
-      <!-- Placeholder post tiles -->
-      <div class="grid grid-cols-3 md:grid-cols-6 gap-3 mb-8">
-        <a href="https://www.instagram.com/koolenergytechnology/" target="_blank" class="insta-tile">
-          <svg class="w-8 h-8 text-white opacity-50" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
-        </a>
-        <a href="https://www.instagram.com/koolenergytechnology/" target="_blank" class="insta-tile"></a>
-        <a href="https://www.instagram.com/koolenergytechnology/" target="_blank" class="insta-tile"></a>
-        <a href="https://www.instagram.com/koolenergytechnology/" target="_blank" class="insta-tile"></a>
-        <a href="https://www.instagram.com/koolenergytechnology/" target="_blank" class="insta-tile"></a>
-        <a href="https://www.instagram.com/koolenergytechnology/" target="_blank" class="insta-tile"></a>
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+
+        <div class="service-card">
+          <div class="service-icon">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5" stroke-width="1.5"/><path stroke-linecap="round" stroke-width="1.5" d="M12 2v2m0 16v2M2 12h2m16 0h2M4.93 4.93l1.41 1.41m11.32 11.32 1.41 1.41M4.93 19.07l1.41-1.41m11.32-11.32 1.41-1.41"/></svg>
+          </div>
+          <h3 class="font-display font-bold text-xl mb-2" style="color:var(--on-surface);letter-spacing:-0.01em;">AIR CONDITIONING</h3>
+          <p class="text-sm leading-relaxed" style="color:var(--on-surface-muted);">Commercial AC installation, replacement, and system upgrades for all commercial building types.</p>
+        </div>
+
+        <div class="service-card">
+          <div class="service-icon">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17.657 18.657A8 8 0 016.343 7.343S7 9 9 10c0-2 .5-5 2.986-7C14 5 16.09 5.777 17.656 7.343A7.975 7.975 0 0120 13a7.975 7.975 0 01-2.343 5.657z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.879 16.121A3 3 0 1012.015 11L11 14H9c0 .768.293 1.536.879 2.121z"/></svg>
+          </div>
+          <h3 class="font-display font-bold text-xl mb-2" style="color:var(--on-surface);letter-spacing:-0.01em;">HEATING SYSTEMS</h3>
+          <p class="text-sm leading-relaxed" style="color:var(--on-surface-muted);">Efficient commercial heating solutions engineered for New York's climate demands.</p>
+        </div>
+
+        <div class="service-card">
+          <div class="service-icon">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"/></svg>
+          </div>
+          <h3 class="font-display font-bold text-xl mb-2" style="color:var(--on-surface);letter-spacing:-0.01em;">INDOOR AIR QUALITY</h3>
+          <p class="text-sm leading-relaxed" style="color:var(--on-surface-muted);">Filtration, ventilation, and humidity control for healthier commercial environments.</p>
+        </div>
+
+        <div class="service-card">
+          <div class="service-icon">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+          </div>
+          <h3 class="font-display font-bold text-xl mb-2" style="color:var(--on-surface);letter-spacing:-0.01em;">DUCTLESS MINI SPLITS</h3>
+          <p class="text-sm leading-relaxed" style="color:var(--on-surface-muted);">Zone-specific climate control for server rooms, offices, and mixed-use commercial spaces.</p>
+        </div>
+
+        <div class="service-card">
+          <div class="service-icon">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+          </div>
+          <h3 class="font-display font-bold text-xl mb-2" style="color:var(--on-surface);letter-spacing:-0.01em;">PREVENTATIVE MAINTENANCE</h3>
+          <p class="text-sm leading-relaxed" style="color:var(--on-surface-muted);">Service contracts that maximize uptime and extend equipment life across your portfolio.</p>
+        </div>
+
+        <div class="service-card">
+          <div class="service-icon">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/></svg>
+          </div>
+          <h3 class="font-display font-bold text-xl mb-2" style="color:var(--on-surface);letter-spacing:-0.01em;">TEMPERATURE CONTROL</h3>
+          <p class="text-sm leading-relaxed" style="color:var(--on-surface-muted);">Precision climate management for wine cellars, server rooms, cold storage, and refrigeration.</p>
+        </div>
+
       </div>
-      <div class="text-center">
-        <a href="instagram.html" class="inline-block border-2 border-navy-900 text-navy-900 font-heading font-bold px-8 py-3 rounded-full hover:bg-navy-900 hover:text-white transition-colors">
-          View Instagram Page
-        </a>
+      <div class="mt-12 text-center">
+        <a href="services.html" class="btn-outline">View All Services &rarr;</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY KOOL -->
+  <section style="background:var(--surface);" class="py-24">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="grid lg:grid-cols-2 gap-16 items-center">
+        <div>
+          <span class="overline-label">Why Choose Us</span>
+          <h2 class="font-display font-bold leading-none mb-6" style="font-size:clamp(2.2rem,5vw,3.4rem);color:var(--on-surface);letter-spacing:-0.02em;">
+            COMMERCIAL-ONLY.<br /><span style="color:var(--secondary);">BUILT DIFFERENT.</span>
+          </h2>
+          <p style="color:var(--on-surface-variant);" class="leading-relaxed mb-8">
+            We don't do residential. Every technician, every tool, every process is purpose-built for the demands of commercial HVAC — from office towers to restaurant chains to industrial facilities.
+          </p>
+          <ul class="space-y-4">
+            <li class="flex items-start gap-3">
+              <span style="color:var(--secondary);" class="mt-0.5 font-bold text-sm">▸</span>
+              <span style="color:var(--on-surface-variant);" class="text-sm">State Licensed &amp; Fully Insured — protecting your business and ours</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span style="color:var(--secondary);" class="mt-0.5 font-bold text-sm">▸</span>
+              <span style="color:var(--on-surface-variant);" class="text-sm">EPA-Certified Technicians with deep commercial specialization</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span style="color:var(--secondary);" class="mt-0.5 font-bold text-sm">▸</span>
+              <span style="color:var(--on-surface-variant);" class="text-sm">24/7 emergency response for critical system failures</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span style="color:var(--secondary);" class="mt-0.5 font-bold text-sm">▸</span>
+              <span style="color:var(--on-surface-variant);" class="text-sm">Transparent flat-rate pricing — no surprises on the invoice</span>
+            </li>
+          </ul>
+          <div class="mt-8">
+            <a href="about.html" class="btn-outline">About the Company &rarr;</a>
+          </div>
+        </div>
+        <div class="grid grid-cols-2 gap-4">
+          <div class="why-stat-card">
+            <div class="font-display font-extrabold" style="font-size:3rem;color:var(--primary);line-height:1;letter-spacing:-0.02em;">100%</div>
+            <div class="text-xs uppercase tracking-widest mt-2" style="color:var(--on-surface-muted);">Commercial Focus</div>
+          </div>
+          <div class="why-stat-card">
+            <div class="font-display font-extrabold" style="font-size:3rem;color:var(--on-surface);line-height:1;letter-spacing:-0.02em;">NY</div>
+            <div class="text-xs uppercase tracking-widest mt-2" style="color:var(--on-surface-muted);">State Licensed</div>
+          </div>
+          <div class="why-stat-card col-span-2">
+            <div class="font-display font-extrabold" style="font-size:2.4rem;color:var(--secondary);line-height:1;letter-spacing:-0.02em;">New York</div>
+            <div class="text-xs uppercase tracking-widest mt-2" style="color:var(--on-surface-muted);">Manhattan &nbsp;·&nbsp; Brooklyn &nbsp;·&nbsp; Queens</div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- CTA BANNER -->
-  <section class="bg-crimson py-16 text-center">
-    <div class="max-w-3xl mx-auto px-6">
-      <h2 class="font-heading font-extrabold text-white text-3xl md:text-4xl mb-4">Ready to Schedule Service?</h2>
-      <p class="font-body text-red-100 text-lg mb-8">Our commercial HVAC team is standing by. Submit a request and we'll be in touch promptly.</p>
-      <a href="service-request.html" class="inline-block bg-white text-crimson font-heading font-bold px-8 py-3 rounded-full hover:bg-gray-100 transition-colors">
-        Request Service Now
-      </a>
+  <section class="cta-section">
+    <div class="max-w-3xl mx-auto text-center relative z-10">
+      <h2 class="font-display font-bold mb-4" style="font-size:clamp(2.2rem,6vw,3.8rem);color:#ffffff;letter-spacing:-0.02em;">READY TO GET STARTED?</h2>
+      <p style="color:rgba(255,255,255,0.6);" class="text-lg mb-10">Talk to a commercial HVAC specialist about your property's needs.</p>
+      <a href="service-request.html" class="btn-cta" style="font-size:0.85rem;padding:0.9rem 2.5rem;">Schedule a Service Call</a>
     </div>
   </section>
 
   <!-- FOOTER -->
-  <footer class="bg-navy-900 text-white py-12">
-    <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-8">
+  <footer class="footer-bar">
+    <div class="max-w-7xl mx-auto px-6 py-14 grid md:grid-cols-3 gap-10">
       <div>
-        <img src="assets/logo.png" alt="Kool Energy Technology" class="h-12 w-auto mb-4" />
-        <p class="font-body text-gray-400 text-sm">Commercial HVAC solutions for South Florida businesses. Licensed, insured, and built for commercial clients.</p>
+        <img src="assets/logo.png" alt="Kool Energy Technology" class="h-10 w-auto mb-4 opacity-75" />
+        <p class="text-sm leading-relaxed" style="color:rgba(255,255,255,0.42);">New York's commercial HVAC specialists. Serving Manhattan, Brooklyn, and Queens.</p>
       </div>
       <div>
-        <h4 class="font-heading font-bold text-crimson uppercase tracking-widest text-sm mb-4">Quick Links</h4>
-        <ul class="space-y-2 font-body text-gray-300 text-sm">
-          <li><a href="index.html"           class="hover:text-white transition-colors">Home</a></li>
-          <li><a href="services.html"        class="hover:text-white transition-colors">Services</a></li>
-          <li><a href="about.html"           class="hover:text-white transition-colors">About</a></li>
-          <li><a href="instagram.html"       class="hover:text-white transition-colors">Instagram</a></li>
-          <li><a href="service-request.html" class="hover:text-white transition-colors">Request Service</a></li>
+        <h4 class="footer-heading">Quick Links</h4>
+        <ul class="space-y-2">
+          <li><a href="index.html" class="footer-link">Home</a></li>
+          <li><a href="services.html" class="footer-link">Services</a></li>
+          <li><a href="about.html" class="footer-link">About</a></li>
+          <li><a href="instagram.html" class="footer-link">Instagram</a></li>
+          <li><a href="service-request.html" class="footer-link">Request Service</a></li>
         </ul>
       </div>
       <div>
-        <h4 class="font-heading font-bold text-crimson uppercase tracking-widest text-sm mb-4">Contact</h4>
-        <ul class="space-y-2 font-body text-gray-300 text-sm">
-          <li>South Florida Service Area</li>
-          <li><a href="https://www.instagram.com/koolenergytechnology/" target="_blank" class="hover:text-white transition-colors">@koolenergytechnology</a></li>
+        <h4 class="footer-heading">Contact</h4>
+        <ul class="space-y-2 text-sm" style="color:rgba(255,255,255,0.42);">
+          <li>New York Service Area</li>
+          <li>Manhattan &nbsp;·&nbsp; Brooklyn &nbsp;·&nbsp; Queens</li>
+          <li class="pt-2"><a href="https://www.instagram.com/koolenergytechnology/" class="footer-link" target="_blank" rel="noopener">@koolenergytechnology</a></li>
         </ul>
       </div>
     </div>
-    <div class="max-w-7xl mx-auto px-6 mt-10 pt-6 border-t border-navy-700 text-center font-body text-gray-500 text-sm">
-      &copy; 2026 Kool Energy Technology. All rights reserved.
+    <div style="border-top:1px solid rgba(255,255,255,0.07);">
+      <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center text-xs" style="color:rgba(255,255,255,0.28);">
+        <span>&copy; 2026 Kool Energy Technology. All rights reserved.</span>
+        <span>Licensed Commercial HVAC Contractor</span>
+      </div>
     </div>
   </footer>
 
