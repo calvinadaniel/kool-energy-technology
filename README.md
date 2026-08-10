@@ -6,6 +6,8 @@ Commercial HVAC marketing site under the Architectural Blueprint design system.
 
 GitHub Pages: https://calvinadaniel.github.io/kool-energy-technology/
 
+Latest release: [v1.0.0](https://github.com/calvinadaniel/kool-energy-technology/releases/tag/v1.0.0)
+
 ## Local preview
 
 ```bash
