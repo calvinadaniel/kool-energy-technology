@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About — Kool Energy Technology</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            display: ['"Manrope"', 'sans-serif'],
+            sans:    ['"Inter"',   'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <script defer src="https://unpkg.com/htmx.org@1.9.10"></script>
+  <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <link rel="stylesheet" href="../assets/style.css" />
+</head>
+<body class="font-sans" hx-boost="true">
+
+  <!-- NAV -->
+  <header class="nav-bar" x-data="{ open: false }">
+    <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+      <a href="../">
+        <img src="../assets/logo.png" alt="Kool Energy Technology" class="h-9 w-auto" />
+      </a>
+      <nav class="hidden md:flex items-center gap-8">
+        <a href="../" class="nav-link">Home</a>
+        <a href="../services/" class="nav-link">Services</a>
+        <a href="../about/" class="nav-link active">About</a>
+        <a href="../instagram/" class="nav-link">Instagram</a>
+        <a href="../service-request/" class="btn-cta">Request Service</a>
+      </nav>
+      <button class="md:hidden p-2" style="color:var(--on-surface-variant);" @click="open = !open" aria-label="Menu">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path x-show="!open" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+          <path x-show="open" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+        </svg>
+      </button>
+    </div>
+    <div x-show="open" x-transition style="background:var(--surface-low);" class="md:hidden px-6 py-4 space-y-3">
+      <a href="../" class="block nav-link py-2">Home</a>
+      <a href="../services/" class="block nav-link py-2">Services</a>
+      <a href="../about/" class="block nav-link py-2">About</a>
+      <a href="../instagram/" class="block nav-link py-2">Instagram</a>
+      <a href="../service-request/" class="btn-cta block text-center mt-4">Request Service</a>
+    </div>
+  </header>
+
+  <!-- PAGE HERO -->
+  <section class="page-hero">
+    <div class="page-hero-inner max-w-7xl mx-auto">
+      <span class="overline-label-light">Who We Are</span>
+      <h1 class="font-display font-extrabold leading-none" style="font-size:clamp(3rem,8vw,5.5rem);color:#ffffff;letter-spacing:-0.02em;">
+        ABOUT KOOL<br /><span style="color:rgba(255,255,255,0.45);">ENERGY</span>
+      </h1>
+      <p class="mt-4 max-w-xl text-base" style="color:rgba(255,255,255,0.6);">
+        A commercial-only HVAC contractor built for New York businesses. Precision engineering. Proven results. Long-term partnerships.
+      </p>
+    </div>
+  </section>
+
+  <!-- STATS ROW — surface-low creates separation from primary hero without a border -->
+  <section style="background:var(--surface-low);" class="py-14">
+    <div class="max-w-7xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-8">
+      <div class="stat-block">
+        <div class="font-display font-extrabold" style="font-size:3.5rem;color:var(--primary);line-height:1;letter-spacing:-0.02em;">20+</div>
+        <div class="text-xs uppercase tracking-widest mt-2" style="color:var(--on-surface-muted);">Years in Business</div>
+      </div>
+      <div class="stat-block">
+        <div class="font-display font-extrabold" style="font-size:3.5rem;color:var(--on-surface);line-height:1;letter-spacing:-0.02em;">500+</div>
+        <div class="text-xs uppercase tracking-widest mt-2" style="color:var(--on-surface-muted);">Commercial Clients</div>
+      </div>
+      <div class="stat-block">
+        <div class="font-display font-extrabold" style="font-size:3.5rem;color:var(--on-surface);line-height:1;letter-spacing:-0.02em;">3</div>
+        <div class="text-xs uppercase tracking-widest mt-2" style="color:var(--on-surface-muted);">Counties Served</div>
+      </div>
+      <div class="stat-block">
+        <div class="font-display font-extrabold" style="font-size:3.5rem;color:var(--secondary);line-height:1;letter-spacing:-0.02em;">24/7</div>
+        <div class="text-xs uppercase tracking-widest mt-2" style="color:var(--on-surface-muted);">Emergency Response</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- OUR STORY -->
+  <section style="background:var(--surface);" class="py-24">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="grid lg:grid-cols-2 gap-16 items-start">
+        <div>
+          <span class="overline-label">Our Story</span>
+          <h2 class="font-display font-bold mb-6" style="font-size:clamp(2rem,4vw,2.8rem);color:var(--on-surface);letter-spacing:-0.02em;">BUILT FOR THE COMMERCIAL SECTOR</h2>
+          <span class="section-rule"></span>
+          <p class="leading-relaxed mb-5" style="color:var(--on-surface-variant);">
+            Kool Energy Technology was founded with one clear focus: deliver professional-grade HVAC services to the commercial market in New York. From day one, we made a decision not to compete in the residential space — and that specialization has defined everything about how we operate.
+          </p>
+          <p class="leading-relaxed mb-5" style="color:var(--on-surface-variant);">
+            Commercial HVAC is a different discipline. The equipment is larger, the tolerances are tighter, the downtime costs are higher, and the regulatory requirements are more demanding. Our team is trained and equipped exclusively for this environment.
+          </p>
+          <p class="leading-relaxed" style="color:var(--on-surface-variant);">
+            We serve property managers, facility operators, business owners, and building engineers across Manhattan, Brooklyn, and Queens — providing the kind of reliable, transparent service that commercial clients expect and deserve.
+          </p>
+        </div>
+        <div class="space-y-3 pt-2">
+          <div class="value-card">
+            <h4 class="font-display font-bold text-xl mb-1" style="color:var(--on-surface);letter-spacing:-0.01em;">TRANSPARENCY</h4>
+            <p class="text-sm leading-relaxed" style="color:var(--on-surface-muted);">Flat-rate pricing on every job. No surprise line items, no upselling. You know the cost before we start.</p>
+          </div>
+          <div class="value-card navy">
+            <h4 class="font-display font-bold text-xl mb-1" style="color:var(--on-surface);letter-spacing:-0.01em;">RELIABILITY</h4>
+            <p class="text-sm leading-relaxed" style="color:var(--on-surface-muted);">We show up on time, diagnose correctly, and fix it right the first time. Our reputation depends on it.</p>
+          </div>
+          <div class="value-card navy">
+            <h4 class="font-display font-bold text-xl mb-1" style="color:var(--on-surface);letter-spacing:-0.01em;">COMMERCIAL FOCUS</h4>
+            <p class="text-sm leading-relaxed" style="color:var(--on-surface-muted);">100% commercial. We understand the unique demands of business-scale HVAC better than any generalist contractor.</p>
+          </div>
+          <div class="value-card">
+            <h4 class="font-display font-bold text-xl mb-1" style="color:var(--on-surface);letter-spacing:-0.01em;">LONG-TERM PARTNERSHIPS</h4>
+            <p class="text-sm leading-relaxed" style="color:var(--on-surface-muted);">We aim to be your HVAC partner for the long term — service contracts and priority scheduling reflect that commitment.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CREDENTIALS — surface-low for section shift without a border -->
+  <section style="background:var(--surface-low);" class="py-24">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="text-center mb-14">
+        <span class="overline-label">Licensed &amp; Certified</span>
+        <h2 class="font-display font-bold" style="font-size:clamp(2rem,4vw,2.8rem);color:var(--on-surface);letter-spacing:-0.02em;">OUR CREDENTIALS</h2>
+      </div>
+      <div class="grid md:grid-cols-3 gap-6">
+
+        <div class="cred-card">
+          <div class="flex justify-center mb-4">
+            <div class="w-12 h-12 rounded-full flex items-center justify-center" style="background:rgba(17,37,129,0.07);">
+              <svg class="w-6 h-6" style="color:var(--primary);" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/>
+              </svg>
+            </div>
+          </div>
+          <h3 class="font-display font-bold text-xl mb-2" style="color:var(--on-surface);letter-spacing:-0.01em;">STATE LICENSED</h3>
+          <p class="text-sm leading-relaxed" style="color:var(--on-surface-muted);">New York state-licensed HVAC contractor. Fully compliant with all applicable codes and regulations for commercial mechanical work.</p>
+        </div>
+
+        <div class="cred-card">
+          <div class="flex justify-center mb-4">
+            <div class="w-12 h-12 rounded-full flex items-center justify-center" style="background:rgba(17,37,129,0.07);">
+              <svg class="w-6 h-6" style="color:var(--primary);" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+              </svg>
+            </div>
+          </div>
+          <h3 class="font-display font-bold text-xl mb-2" style="color:var(--on-surface);letter-spacing:-0.01em;">FULLY INSURED</h3>
+          <p class="text-sm leading-relaxed" style="color:var(--on-surface-muted);">Comprehensive general liability and workers' compensation coverage. Protecting your property and our team on every job.</p>
+        </div>
+
+        <div class="cred-card">
+          <div class="flex justify-center mb-4">
+            <div class="w-12 h-12 rounded-full flex items-center justify-center" style="background:rgba(17,37,129,0.07);">
+              <svg class="w-6 h-6" style="color:var(--primary);" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"/>
+              </svg>
+            </div>
+          </div>
+          <h3 class="font-display font-bold text-xl mb-2" style="color:var(--on-surface);letter-spacing:-0.01em;">EPA CERTIFIED</h3>
+          <p class="text-sm leading-relaxed" style="color:var(--on-surface-muted);">All technicians hold EPA 608 certification for refrigerant handling. Compliant with all federal environmental regulations.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section">
+    <div class="max-w-3xl mx-auto text-center relative z-10">
+      <h2 class="font-display font-bold mb-4" style="font-size:clamp(2.2rem,6vw,3.8rem);color:#ffffff;letter-spacing:-0.02em;">LET'S WORK TOGETHER</h2>
+      <p style="color:rgba(255,255,255,0.6);" class="text-lg mb-10">Ready to talk about your building's HVAC needs? Reach out and we'll respond promptly.</p>
+      <a href="../service-request/" class="btn-cta" style="font-size:0.85rem;padding:0.9rem 2.5rem;">Request Service</a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer-bar">
+    <div class="max-w-7xl mx-auto px-6 py-14 grid md:grid-cols-3 gap-10">
+      <div>
+        <img src="../assets/logo.png" alt="Kool Energy Technology" class="h-10 w-auto mb-4 opacity-75" />
+        <p class="text-sm leading-relaxed" style="color:rgba(255,255,255,0.42);">New York's commercial HVAC specialists. Serving Manhattan, Brooklyn, and Queens.</p>
+      </div>
+      <div>
+        <h4 class="footer-heading">Quick Links</h4>
+        <ul class="space-y-2">
+          <li><a href="../" class="footer-link">Home</a></li>
+          <li><a href="../services/" class="footer-link">Services</a></li>
+          <li><a href="../about/" class="footer-link">About</a></li>
+          <li><a href="../instagram/" class="footer-link">Instagram</a></li>
+          <li><a href="../service-request/" class="footer-link">Request Service</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="footer-heading">Contact</h4>
+        <ul class="space-y-2 text-sm" style="color:rgba(255,255,255,0.42);">
+          <li>New York Service Area</li>
+          <li>Manhattan &nbsp;·&nbsp; Brooklyn &nbsp;·&nbsp; Queens</li>
+          <li class="pt-2"><a href="https://www.instagram.com/koolenergytechnology/" class="footer-link" target="_blank" rel="noopener">@koolenergytechnology</a></li>
+        </ul>
+      </div>
+    </div>
+    <div style="border-top:1px solid rgba(255,255,255,0.07);">
+      <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center text-xs" style="color:rgba(255,255,255,0.28);">
+        <span>&copy; 2026 Kool Energy Technology. All rights reserved.</span>
+        <span>Licensed Commercial HVAC Contractor</span>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

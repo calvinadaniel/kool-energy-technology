@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Instagram — Kool Energy Technology</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            display: ['"Manrope"', 'sans-serif'],
+            sans:    ['"Inter"',   'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <script defer src="https://unpkg.com/htmx.org@1.9.10"></script>
+  <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <link rel="stylesheet" href="../assets/style.css" />
+</head>
+<body class="font-sans" hx-boost="true">
+
+  <!-- NAV -->
+  <header class="nav-bar" x-data="{ open: false }">
+    <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+      <a href="../">
+        <img src="../assets/logo.png" alt="Kool Energy Technology" class="h-9 w-auto" />
+      </a>
+      <nav class="hidden md:flex items-center gap-8">
+        <a href="../" class="nav-link">Home</a>
+        <a href="../services/" class="nav-link">Services</a>
+        <a href="../about/" class="nav-link">About</a>
+        <a href="../instagram/" class="nav-link active">Instagram</a>
+        <a href="../service-request/" class="btn-cta">Request Service</a>
+      </nav>
+      <button class="md:hidden p-2" style="color:var(--on-surface-variant);" @click="open = !open" aria-label="Menu">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path x-show="!open" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+          <path x-show="open" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+        </svg>
+      </button>
+    </div>
+    <div x-show="open" x-transition style="background:var(--surface-low);" class="md:hidden px-6 py-4 space-y-3">
+      <a href="../" class="block nav-link py-2">Home</a>
+      <a href="../services/" class="block nav-link py-2">Services</a>
+      <a href="../about/" class="block nav-link py-2">About</a>
+      <a href="../instagram/" class="block nav-link py-2">Instagram</a>
+      <a href="../service-request/" class="btn-cta block text-center mt-4">Request Service</a>
+    </div>
+  </header>
+
+  <!-- PAGE HERO -->
+  <section class="page-hero">
+    <div class="page-hero-inner max-w-7xl mx-auto">
+      <span class="overline-label-light">Social</span>
+      <h1 class="font-display font-extrabold leading-none" style="font-size:clamp(3rem,8vw,5.5rem);color:#ffffff;letter-spacing:-0.02em;">
+        FOLLOW US ON<br /><span style="color:rgba(255,255,255,0.45);">INSTAGRAM</span>
+      </h1>
+    </div>
+  </section>
+
+  <!-- PROFILE — surface-low for background shift from primary hero -->
+  <section style="background:var(--surface-low);" class="py-12">
+    <div class="max-w-3xl mx-auto px-6">
+      <div class="flex items-start sm:items-center gap-4 sm:gap-6 min-w-0">
+        <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-full flex items-center justify-center flex-shrink-0" style="background:rgba(17,37,129,0.07);">
+          <svg class="w-8 h-8 sm:w-9 sm:h-9" style="color:rgba(17,37,129,0.35);" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <rect x="2" y="2" width="20" height="20" rx="5" ry="5" stroke-width="1.5"/>
+            <circle cx="12" cy="12" r="4" stroke-width="1.5"/>
+            <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/>
+          </svg>
+        </div>
+        <div class="min-w-0 flex-1">
+          <h2 class="font-display font-bold text-xl sm:text-3xl" style="color:var(--on-surface);letter-spacing:-0.02em;overflow-wrap:anywhere;">@koolenergytechnology</h2>
+          <p class="text-sm mt-1" style="color:var(--on-surface-muted);">New York Commercial HVAC &nbsp;·&nbsp; Licensed &amp; Insured</p>
+          <a href="https://www.instagram.com/koolenergytechnology/" target="_blank" rel="noopener"
+             class="btn-primary inline-block mt-4" style="font-size:0.72rem;padding:0.5rem 1.2rem;">
+            Follow on Instagram
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ASYMMETRIC MASONRY GRID — per DESIGN.md "Industrial Grid" spec -->
+  <section style="background:var(--surface);" class="py-16">
+    <div class="max-w-4xl mx-auto px-6">
+      <p class="text-xs uppercase tracking-widest mb-8" style="color:var(--on-surface-muted);">Recent Posts</p>
+
+      <div class="insta-masonry">
+
+        <!-- Col 1 starts -->
+        <a href="https://www.instagram.com/koolenergytechnology/" target="_blank" rel="noopener"
+           class="insta-tile insta-tile-sq">
+          <svg class="w-10 h-10" style="color:rgba(17,37,129,0.16);" fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5" stroke-width="1"/><path stroke-linecap="round" stroke-width="1" d="M12 2v2m0 16v2M2 12h2m16 0h2"/></svg>
+        </a>
+
+        <a href="https://www.instagram.com/koolenergytechnology/" target="_blank" rel="noopener"
+           class="insta-tile insta-tile-tall">
+          <svg class="w-10 h-10" style="color:rgba(17,37,129,0.12);" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+        </a>
+
+        <a href="https://www.instagram.com/koolenergytechnology/" target="_blank" rel="noopener"
+           class="insta-tile insta-tile-sq">
+          <svg class="w-10 h-10" style="color:rgba(17,37,129,0.16);" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+        </a>
+
+        <!-- Col 2 / 3 fills -->
+        <a href="https://www.instagram.com/koolenergytechnology/" target="_blank" rel="noopener"
+           class="insta-tile insta-tile-wide">
+          <svg class="w-10 h-10" style="color:rgba(17,37,129,0.12);" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"/></svg>
+        </a>
+
+        <a href="https://www.instagram.com/koolenergytechnology/" target="_blank" rel="noopener"
+           class="insta-tile insta-tile-sq">
+          <svg class="w-10 h-10" style="color:rgba(17,37,129,0.16);" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/></svg>
+        </a>
+
+        <a href="https://www.instagram.com/koolenergytechnology/" target="_blank" rel="noopener"
+           class="insta-tile insta-tile-tall">
+          <svg class="w-10 h-10" style="color:rgba(17,37,129,0.12);" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"/></svg>
+        </a>
+
+        <a href="https://www.instagram.com/koolenergytechnology/" target="_blank" rel="noopener"
+           class="insta-tile insta-tile-wide">
+          <svg class="w-10 h-10" style="color:rgba(17,37,129,0.16);" fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5" stroke-width="1"/><path stroke-linecap="round" stroke-width="1" d="M12 2v2m0 16v2M2 12h2m16 0h2M4.93 4.93l1.41 1.41m11.32 11.32 1.41 1.41"/></svg>
+        </a>
+
+        <a href="https://www.instagram.com/koolenergytechnology/" target="_blank" rel="noopener"
+           class="insta-tile insta-tile-sq">
+          <svg class="w-10 h-10" style="color:rgba(17,37,129,0.12);" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M17.657 18.657A8 8 0 016.343 7.343S7 9 9 10c0-2 .5-5 2.986-7C14 5 16.09 5.777 17.656 7.343A7.975 7.975 0 0120 13a7.975 7.975 0 01-2.343 5.657z"/></svg>
+        </a>
+
+        <a href="https://www.instagram.com/koolenergytechnology/" target="_blank" rel="noopener"
+           class="insta-tile insta-tile-tall">
+          <svg class="w-10 h-10" style="color:rgba(17,37,129,0.16);" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+        </a>
+
+      </div>
+
+      <p class="text-center text-xs mt-10" style="color:var(--on-surface-muted);opacity:0.55;">
+        Live feed — production implementation uses LightWidget or the Instagram Basic Display API.
+      </p>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer-bar">
+    <div class="max-w-7xl mx-auto px-6 py-14 grid md:grid-cols-3 gap-10">
+      <div>
+        <img src="../assets/logo.png" alt="Kool Energy Technology" class="h-10 w-auto mb-4 opacity-75" />
+        <p class="text-sm leading-relaxed" style="color:rgba(255,255,255,0.42);">New York's commercial HVAC specialists. Serving Manhattan, Brooklyn, and Queens.</p>
+      </div>
+      <div>
+        <h4 class="footer-heading">Quick Links</h4>
+        <ul class="space-y-2">
+          <li><a href="../" class="footer-link">Home</a></li>
+          <li><a href="../services/" class="footer-link">Services</a></li>
+          <li><a href="../about/" class="footer-link">About</a></li>
+          <li><a href="../instagram/" class="footer-link">Instagram</a></li>
+          <li><a href="../service-request/" class="footer-link">Request Service</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="footer-heading">Contact</h4>
+        <ul class="space-y-2 text-sm" style="color:rgba(255,255,255,0.42);">
+          <li>New York Service Area</li>
+          <li>Manhattan &nbsp;·&nbsp; Brooklyn &nbsp;·&nbsp; Queens</li>
+          <li class="pt-2"><a href="https://www.instagram.com/koolenergytechnology/" class="footer-link" target="_blank" rel="noopener">@koolenergytechnology</a></li>
+        </ul>
+      </div>
+    </div>
+    <div style="border-top:1px solid rgba(255,255,255,0.07);">
+      <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center text-xs" style="color:rgba(255,255,255,0.28);">
+        <span>&copy; 2026 Kool Energy Technology. All rights reserved.</span>
+        <span>Licensed Commercial HVAC Contractor</span>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

@@ -20,11 +20,11 @@ Open the URL shown in the terminal (usually `http://127.0.0.1:8080`).
 
 | Path | Page |
 |---|---|
-| `/` / `index.html` | Home |
-| `services.html` | Services |
-| `about.html` | About |
-| `instagram.html` | Instagram |
-| `service-request.html` | Service Request |
+| `/` | Home |
+| `/services/` | Services |
+| `/about/` | About |
+| `/instagram/` | Instagram |
+| `/service-request/` | Service Request |
 
 ## Tech stack
 
