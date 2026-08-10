@@ -1,0 +1,8 @@
+.playwright-mcp/
+node_modules/
+.DS_Store
+Thumbs.db
+*.log
+redesign-*.png
+qa-*.png
+qa-*.json

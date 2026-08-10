@@ -1,28 +1,33 @@
 # Kool Energy Technology — Website Mockup
 
-## Live Preview
+Commercial HVAC marketing site under the Architectural Blueprint design system.
 
-Requires Node.js (any version).
+## Live site
+
+GitHub Pages: https://calvinadaniel.github.io/kool-energy-technology/
+
+## Local preview
 
 ```bash
 npx live-server
 ```
 
-Open [http://127.0.0.1:8080](http://127.0.0.1:8080) in your browser.
+Open the URL shown in the terminal (usually `http://127.0.0.1:8080`).
 
 ## Pages
 
-| URL | Page |
+| Path | Page |
 |---|---|
-| `/index.html` | Home |
-| `/services.html` | Services |
-| `/about.html` | About |
-| `/instagram.html` | Instagram |
-| `/service-request.html` | Service Request |
+| `/` / `index.html` | Home |
+| `services.html` | Services |
+| `about.html` | About |
+| `instagram.html` | Instagram |
+| `service-request.html` | Service Request |
 
-## Tech Stack
+## Tech stack
 
-- Tailwind CSS v3 (CDN Play — no build needed)
+- Tailwind CSS v3 (CDN)
 - HTMX 1.9 (CDN)
 - Alpine.js 3.x (CDN)
-- Google Fonts: Montserrat + Inter
+- Google Fonts: Manrope + Inter
+- Custom CSS: `assets/style.css`
