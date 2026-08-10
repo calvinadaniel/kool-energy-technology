@@ -278,69 +278,91 @@ body {
 }
 
 @media (max-width: 1023px) {
-  .hero-copy { max-width: 36rem; }
+  /* Compact Band: short image strip + content stack; no full-viewport lock */
+  .hero-section {
+    height: auto;
+    min-height: 0;
+    max-height: none;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
+  }
+  .hero-grid-bg,
+  .hero-glow {
+    display: none;
+  }
   .hero-img-panel {
+    position: relative;
     width: 100%;
+    height: 200px;
+    top: auto;
+    right: auto;
+    bottom: auto;
+    flex-shrink: 0;
     -webkit-mask-image: none;
     mask-image: none;
+    z-index: 1;
   }
   .hero-img-panel::after {
     background: linear-gradient(
       to top,
-      rgba(17,37,129,0.96) 0%,
-      rgba(17,37,129,0.82) 42%,
-      rgba(17,37,129,0.45) 100%
+      rgba(17, 37, 129, 0.55) 0%,
+      rgba(17, 37, 129, 0.15) 100%
     );
   }
-}
-
-@media (max-width: 640px) {
-  .hero-section {
-    min-height: 100svh;
-    height: auto;
-    align-items: stretch;
-  }
   .hero-inner {
-    padding-top: 5rem;
+    padding-top: 1.25rem;
     padding-bottom: 1.5rem;
   }
   .hero-copy { max-width: none; }
-  .hero-logo { height: 2.85rem; margin-bottom: 0.7rem; }
+}
+
+@media (max-width: 640px) {
+  .hero-img-panel { height: 168px; }
+  .hero-inner {
+    padding-top: 1.125rem;
+    padding-bottom: 1.375rem;
+  }
+  .hero-logo { height: 2.5rem; margin-bottom: 0.625rem; }
   .hero-slogan {
-    font-size: 0.72rem;
-    letter-spacing: 0.12em;
-    margin-bottom: 0.9rem;
+    font-size: 0.7rem;
+    letter-spacing: 0.14em;
+    margin-bottom: 0.625rem;
   }
   .hero-lead {
-    font-size: 0.9rem;
-    margin-bottom: 1.15rem;
-    line-height: 1.5;
+    font-size: 0.875rem;
+    margin-bottom: 0.875rem;
+    line-height: 1.45;
   }
   .hero-actions {
     flex-direction: column;
     align-items: stretch;
-    gap: 0.6rem;
+    gap: 0.5rem;
   }
   .hero-actions .btn-cta,
   .hero-actions .btn-ghost {
     text-align: center;
-    padding: 0.75rem 1.15rem;
+    padding: 0.75rem 1.1rem;
   }
   .hero-stats {
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: 1fr;
     gap: 0.4rem;
-    margin-top: 1.25rem;
+    margin-top: 0.875rem;
   }
   .hero-stat {
-    padding: 0.55rem 0.3rem;
-    text-align: center;
+    padding: 0.625rem 0.75rem;
+    text-align: left;
+    display: flex;
+    align-items: baseline;
+    gap: 0.75rem;
   }
-  .hero-stat-num { font-size: 1.2rem; }
+  .hero-stat-num { font-size: 1.375rem; }
   .hero-stat-label {
-    font-size: 0.55rem;
-    letter-spacing: 0.05em;
-    line-height: 1.25;
+    font-size: 0.625rem;
+    letter-spacing: 0.08em;
+    line-height: 1.2;
+    margin-top: 0;
   }
 }
 
