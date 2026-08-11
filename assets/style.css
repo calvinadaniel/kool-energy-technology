@@ -162,6 +162,39 @@ body {
   margin-bottom: 0.85rem;
 }
 
+/* Shared type scale — keep sizes out of inline styles */
+.h-page {
+  font-family: 'Manrope', sans-serif;
+  font-weight: 800;
+  font-size: clamp(3rem, 8vw, 5.5rem);
+  letter-spacing: -0.02em;
+  color: #ffffff;
+  line-height: 1;
+}
+.h-section {
+  font-family: 'Manrope', sans-serif;
+  font-weight: 700;
+  font-size: clamp(2rem, 4.5vw, 3rem);
+  letter-spacing: -0.02em;
+  color: var(--on-surface);
+  line-height: 1.1;
+}
+.h-cta {
+  font-family: 'Manrope', sans-serif;
+  font-weight: 700;
+  font-size: clamp(2.2rem, 6vw, 3.8rem);
+  letter-spacing: -0.02em;
+  color: #ffffff;
+  line-height: 1.1;
+}
+.stat-num {
+  font-family: 'Manrope', sans-serif;
+  font-weight: 800;
+  font-size: clamp(2.4rem, 5vw, 3.5rem);
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
 /* ─── Hero (full height, dark blue) ─── */
 .hero-section {
   position: relative;
@@ -244,30 +277,41 @@ body {
   pointer-events: none;
 }
 
-/* Right-side hero image panel */
+/* Right-side hero media panel */
 .hero-img-panel {
   position: absolute;
   right: 0;
   top: 0;
   bottom: 0;
   width: 48%;
-  background-size: cover;
-  background-position: center;
+  overflow: hidden;
   /* Fade left edge into hero background */
   -webkit-mask-image: linear-gradient(to right, transparent 0%, black 28%);
   mask-image: linear-gradient(to right, transparent 0%, black 28%);
   z-index: 1;
 }
+.hero-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  pointer-events: none;
+}
 .hero-img-panel::after {
   content: '';
   position: absolute;
   inset: 0;
-  /* Primary blue tint to unify image with hero palette */
+  /* Primary blue tint to unify media with hero palette */
   background: linear-gradient(to right,
     rgba(17,37,129,0.05) 0%,
     rgba(17,37,129,0.40) 60%,
     rgba(17,37,129,0.55) 100%
   );
+  z-index: 1;
+  pointer-events: none;
 }
 
 /* Blue-on-Blue stat chip (primary-container on primary background) */
@@ -344,6 +388,9 @@ body {
     text-align: center;
     padding: 0.75rem 1.1rem;
   }
+  .cta-section .btn-cta {
+    padding: 0.75rem 1.1rem;
+  }
   .hero-stats {
     display: grid;
     grid-template-columns: 1fr;
@@ -369,7 +416,7 @@ body {
 /* ─── Interior Page Hero ─── */
 .page-hero {
   background: var(--primary);
-  padding: 7rem 1.5rem 5rem;
+  padding: 7rem 0 5rem;
   position: relative;
   overflow: hidden;
 }
@@ -384,7 +431,12 @@ body {
   -webkit-mask-image: radial-gradient(ellipse 65% 80% at 22% 50%, black, transparent);
   mask-image: radial-gradient(ellipse 65% 80% at 22% 50%, black, transparent);
 }
-.page-hero-inner { position: relative; z-index: 1; }
+.page-hero-inner {
+  position: relative;
+  z-index: 1;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
 
 /* ─── Service Cards (home grid) ─── */
 .service-card {
@@ -437,6 +489,10 @@ body {
     linear-gradient(90deg, rgba(255,255,255,0.028) 1px, transparent 1px);
   background-size: 48px 48px;
   pointer-events: none;
+}
+.cta-section .btn-cta {
+  font-size: 0.85rem;
+  padding: 0.9rem 2.5rem;
 }
 
 /* ─── Footer ─── */
@@ -602,6 +658,7 @@ body {
   .page-hero-inner > *:nth-child(1) { animation-delay: 0.05s; }
   .page-hero-inner > *:nth-child(2) { animation-delay: 0.14s; }
   .page-hero-inner > *:nth-child(3) { animation-delay: 0.22s; }
+  .page-hero-inner > *:nth-child(4) { animation-delay: 0.3s; }
 
   body > section:not(.hero-section):not(.page-hero) { animation-delay: 0.16s; }
 

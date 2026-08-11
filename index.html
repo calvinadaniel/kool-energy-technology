@@ -6,7 +6,7 @@
   <title>Kool Energy Technology — Commercial HVAC New York</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -59,16 +59,20 @@
   <section class="hero-section">
     <div class="hero-grid-bg"></div>
     <div class="hero-glow"></div>
-    <!-- Right-side hero image — ductwork / industrial HVAC -->
-    <div class="hero-img-panel" style="background-image:url('assets/pexels-adrien-olichon-1257089-2464420.jpg');"></div>
+    <!-- Right-side hero video — overhead HVAC -->
+    <div class="hero-img-panel">
+      <video class="hero-video" autoplay muted loop playsinline aria-hidden="true">
+        <source src="assets/overhead-view-hvac.mp4" type="video/mp4" />
+      </video>
+    </div>
     <div class="hero-inner max-w-7xl mx-auto px-6 w-full relative z-10">
       <div class="hero-copy">
         <!-- Logo as hero identity mark -->
         <img class="hero-logo" src="assets/logo.png" alt="Kool Energy Technology" />
         <!-- Slogan — small, tracked, subdued -->
-        <p class="hero-slogan font-display">
+        <h1 class="hero-slogan font-display">
           Precision Cooling for Business
-        </p>
+        </h1>
         <p class="hero-lead">
           Industrial-grade HVAC solutions for commercial properties, office buildings, and facilities across New York. Licensed. Insured. Built for business.
         </p>
@@ -101,7 +105,7 @@
     <div class="max-w-7xl mx-auto px-6">
       <div class="mb-14">
         <span class="overline-label">What We Do</span>
-        <h2 class="font-display font-bold" style="font-size:clamp(2rem,5vw,3rem);color:var(--on-surface);letter-spacing:-0.02em;">COMMERCIAL HVAC SERVICES</h2>
+        <h2 class="h-section">COMMERCIAL HVAC SERVICES</h2>
       </div>
       <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
 
@@ -166,7 +170,7 @@
       <div class="grid lg:grid-cols-2 gap-16 items-center">
         <div>
           <span class="overline-label">Why Choose Us</span>
-          <h2 class="font-display font-bold leading-none mb-6" style="font-size:clamp(2.2rem,5vw,3.4rem);color:var(--on-surface);letter-spacing:-0.02em;">
+          <h2 class="h-section leading-none mb-6">
             COMMERCIAL-ONLY.<br /><span style="color:var(--secondary);">BUILT DIFFERENT.</span>
           </h2>
           <p style="color:var(--on-surface-variant);" class="leading-relaxed mb-8">
@@ -196,15 +200,15 @@
         </div>
         <div class="grid grid-cols-2 gap-4">
           <div class="why-stat-card">
-            <div class="font-display font-extrabold" style="font-size:3rem;color:var(--primary);line-height:1;letter-spacing:-0.02em;">100%</div>
+            <div class="stat-num" style="color:var(--primary);">100%</div>
             <div class="text-xs uppercase tracking-widest mt-2" style="color:var(--on-surface-muted);">Commercial Focus</div>
           </div>
           <div class="why-stat-card">
-            <div class="font-display font-extrabold" style="font-size:3rem;color:var(--on-surface);line-height:1;letter-spacing:-0.02em;">NY</div>
+            <div class="stat-num" style="color:var(--on-surface);">NY</div>
             <div class="text-xs uppercase tracking-widest mt-2" style="color:var(--on-surface-muted);">State Licensed</div>
           </div>
           <div class="why-stat-card col-span-2">
-            <div class="font-display font-extrabold" style="font-size:2.4rem;color:var(--secondary);line-height:1;letter-spacing:-0.02em;">New York</div>
+            <div class="stat-num" style="color:var(--secondary);">New York</div>
             <div class="text-xs uppercase tracking-widest mt-2" style="color:var(--on-surface-muted);">Manhattan &nbsp;·&nbsp; Brooklyn &nbsp;·&nbsp; Queens</div>
           </div>
         </div>
@@ -215,9 +219,9 @@
   <!-- CTA BANNER -->
   <section class="cta-section">
     <div class="max-w-3xl mx-auto text-center relative z-10">
-      <h2 class="font-display font-bold mb-4" style="font-size:clamp(2.2rem,6vw,3.8rem);color:#ffffff;letter-spacing:-0.02em;">READY TO GET STARTED?</h2>
+      <h2 class="h-cta mb-4">READY TO GET STARTED?</h2>
       <p style="color:rgba(255,255,255,0.6);" class="text-lg mb-10">Talk to a commercial HVAC specialist about your property's needs.</p>
-      <a href="service-request/" class="btn-cta" style="font-size:0.85rem;padding:0.9rem 2.5rem;">Schedule a Service Call</a>
+      <a href="service-request/" class="btn-cta">Schedule a Service Call</a>
     </div>
   </section>
 
