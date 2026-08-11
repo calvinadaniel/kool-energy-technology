@@ -1,8 +1,34 @@
 .playwright-mcp/
 node_modules/
+.package-lock.json
+package-lock.json
 .DS_Store
 Thumbs.db
 *.log
 redesign-*.png
 qa-*.png
 qa-*.json
+
+# Before/after capture assets (large binaries)
+transformation/
+
+# Design exploration (not shipped)
+design-demos/
+
+# Internal planning docs
+docs/
+
+# Client contract / quote / invoice materials (private)
+contract.html
+invoice.html
+quote.html
+quote.pdf
+timeline.html
+timeline.pdf
+Calant_Digital_Contract_KoolEnergy.pdf
+kool-energy-technology-contract-08-06-2026.pdf
+
+# Unused / contractor-only assets
+assets/calant-digital-bracket-logo-white.webp
+assets/calvin-daniel-logo.png
+assets/pexels-alpha-innotec-936418931-20046689.jpg
