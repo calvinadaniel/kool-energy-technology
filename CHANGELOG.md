@@ -2,6 +2,27 @@
 
 All notable changes to the Kool Energy Technology website are documented here.
 
+## [1.2.0] — 2026-08-11
+
+Homepage hero video, shared typography scale, and live Instagram feed.
+
+**Live:** https://calvinadaniel.github.io/kool-energy-technology/
+
+### Homepage
+
+- Replaced the static hero image with a looping overhead HVAC video (`assets/overhead-view-hvac.mp4`)
+- Promoted the slogan to a proper page heading for clearer hierarchy
+
+### Typography
+
+- Moved page, section, CTA, and stat type sizes into shared CSS classes so headings stay consistent across pages
+
+### Instagram
+
+- Switched the Instagram page to a LightWidget embed with setup guidance until the widget ID is configured
+
+[1.2.0]: https://github.com/calvinadaniel/kool-energy-technology/releases/tag/v1.2.0
+
 ## [1.1.0] — 2026-08-10
 
 Clean folder URLs so page paths no longer show `.html`.
