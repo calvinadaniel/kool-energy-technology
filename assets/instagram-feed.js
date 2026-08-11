@@ -1,0 +1,51 @@
+/**
+ * LightWidget Instagram feed
+ *
+ * After connecting @koolenergytechnology at https://lightwidget.com
+ * (Business/Creator + Graph API connection), paste the widget hash here.
+ * Embed URL …/widgets/abc123.html → id is "abc123"
+ */
+window.KOOL_LIGHTWIDGET_ID = '';
+
+(function () {
+  function mountFeed() {
+    var mount = document.getElementById('instagram-feed');
+    if (!mount || mount.getAttribute('data-mounted') === '1') return;
+
+    var id = String(window.KOOL_LIGHTWIDGET_ID || '').trim();
+    if (!id) {
+      mount.innerHTML =
+        '<div class="instagram-feed-pending">' +
+        '<p>Connect the live Instagram feed: create a grid widget at ' +
+        '<a href="https://lightwidget.com/" target="_blank" rel="noopener">LightWidget</a> ' +
+        'with <strong>@koolenergytechnology</strong> (Business/Creator), then set ' +
+        '<code>KOOL_LIGHTWIDGET_ID</code> in <code>assets/instagram-feed.js</code>.</p>' +
+        '<a class="btn-primary inline-block mt-4" href="https://www.instagram.com/koolenergytechnology/" ' +
+        'target="_blank" rel="noopener">View posts on Instagram</a>' +
+        '</div>';
+      mount.setAttribute('data-mounted', '1');
+      return;
+    }
+
+    if (!document.querySelector('script[src*="lightwidget.js"]')) {
+      var script = document.createElement('script');
+      script.src = 'https://cdn.lightwidget.com/widgets/lightwidget.js';
+      script.async = true;
+      document.head.appendChild(script);
+    }
+
+    var frame = document.createElement('iframe');
+    frame.src = 'https://cdn.lightwidget.com/widgets/' + encodeURIComponent(id) + '.html';
+    frame.className = 'lightwidget-widget';
+    frame.setAttribute('scrolling', 'no');
+    frame.setAttribute('allowtransparency', 'true');
+    frame.setAttribute('title', 'Kool Energy Technology on Instagram');
+    frame.style.cssText = 'width:100%;border:0;overflow:hidden;';
+    mount.innerHTML = '';
+    mount.appendChild(frame);
+    mount.setAttribute('data-mounted', '1');
+  }
+
+  mountFeed();
+  document.body.addEventListener('htmx:afterSettle', mountFeed);
+})();
