@@ -2,6 +2,18 @@
 
 All notable changes to the Kool Energy Technology website are documented here.
 
+## [1.2.1] — 2026-08-13
+
+Service area copy now covers the Tri-State Area.
+
+**Live:** https://calvinadaniel.github.io/kool-energy-technology/
+
+### Service area
+
+- Footer, homepage Why Choose Us, and About page now say the company serves the Tri-State Area instead of Manhattan, Brooklyn, and Queens
+
+[1.2.1]: https://github.com/calvinadaniel/kool-energy-technology/releases/tag/v1.2.1
+
 ## [1.2.0] — 2026-08-11
 
 Homepage hero video, shared typography scale, and live Instagram feed.
