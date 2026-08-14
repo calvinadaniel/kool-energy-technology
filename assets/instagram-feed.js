@@ -5,7 +5,7 @@
  * (Business/Creator + Graph API connection), paste the widget hash here.
  * Embed URL …/widgets/abc123.html → id is "abc123"
  */
-window.KOOL_LIGHTWIDGET_ID = '';
+window.KOOL_LIGHTWIDGET_ID = '6aa6d08f75965e87bb64ec8979329053';
 
 (function () {
   function mountFeed() {
