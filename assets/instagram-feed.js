@@ -27,23 +27,50 @@ window.KOOL_LIGHTWIDGET_ID = '6aa6d08f75965e87bb64ec8979329053';
       return;
     }
 
-    if (!document.querySelector('script[src*="lightwidget.js"]')) {
-      var script = document.createElement('script');
-      script.src = 'https://cdn.lightwidget.com/widgets/lightwidget.js';
-      script.async = true;
-      document.head.appendChild(script);
-    }
-
     var frame = document.createElement('iframe');
-    frame.src = 'https://cdn.lightwidget.com/widgets/' + encodeURIComponent(id) + '.html';
     frame.className = 'lightwidget-widget';
     frame.setAttribute('scrolling', 'no');
     frame.setAttribute('allowtransparency', 'true');
     frame.setAttribute('title', 'Kool Energy Technology on Instagram');
-    frame.style.cssText = 'width:100%;border:0;overflow:hidden;';
+    frame.style.cssText = 'width:100%;border:0;overflow:hidden;min-height:28rem;';
     mount.innerHTML = '';
     mount.appendChild(frame);
     mount.setAttribute('data-mounted', '1');
+
+    var widgetUrl = 'https://cdn.lightwidget.com/widgets/' + encodeURIComponent(id) + '.html';
+    var existing = document.querySelector('script[src*="lightwidget.js"]');
+
+    function setSrc() {
+      if (!frame.getAttribute('src')) frame.src = widgetUrl;
+    }
+
+    function loadWhenVisible() {
+      if (!('IntersectionObserver' in window)) {
+        setSrc();
+        return;
+      }
+      var io = new IntersectionObserver(function (entries) {
+        for (var i = 0; i < entries.length; i++) {
+          if (entries[i].isIntersecting) {
+            io.disconnect();
+            setSrc();
+            break;
+          }
+        }
+      }, { rootMargin: '120px 0px', threshold: 0.01 });
+      io.observe(frame);
+    }
+
+    if (existing) {
+      loadWhenVisible();
+      return;
+    }
+
+    var script = document.createElement('script');
+    script.src = 'https://cdn.lightwidget.com/widgets/lightwidget.js';
+    script.onload = loadWhenVisible;
+    script.onerror = loadWhenVisible;
+    document.head.appendChild(script);
   }
 
   mountFeed();
