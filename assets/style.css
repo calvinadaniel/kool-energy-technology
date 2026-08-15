@@ -322,50 +322,75 @@ body {
 }
 
 @media (max-width: 1023px) {
-  /* Compact Band: short image strip + content stack; no full-viewport lock */
+  /* Video fills the hero and reads through the navy — not a separate strip */
   .hero-section {
     height: auto;
     min-height: 0;
     max-height: none;
-    flex-direction: column;
-    justify-content: flex-start;
     align-items: stretch;
   }
-  .hero-grid-bg,
   .hero-glow {
     display: none;
   }
   .hero-img-panel {
-    position: relative;
+    position: absolute;
+    inset: 0;
     width: 100%;
-    height: 200px;
-    top: auto;
-    right: auto;
-    bottom: auto;
-    flex-shrink: 0;
+    height: 100%;
+    top: 0;
+    right: 0;
+    bottom: 0;
     -webkit-mask-image: none;
     mask-image: none;
-    z-index: 1;
+    z-index: 0;
+  }
+  .hero-video {
+    opacity: 0.42;
   }
   .hero-img-panel::after {
     background: linear-gradient(
-      to top,
-      rgba(17, 37, 129, 0.55) 0%,
-      rgba(17, 37, 129, 0.15) 100%
+      180deg,
+      rgba(17, 37, 129, 0.76) 0%,
+      rgba(17, 37, 129, 0.68) 45%,
+      rgba(17, 37, 129, 0.80) 100%
     );
   }
   .hero-inner {
-    padding-top: 1.25rem;
-    padding-bottom: 1.5rem;
+    padding-top: 2.25rem;
+    padding-bottom: 2.5rem;
   }
   .hero-copy { max-width: none; }
+  .hero-slogan,
+  .hero-lead {
+    text-shadow: 0 1px 16px rgba(17, 37, 129, 0.85);
+  }
+  .hero-lead {
+    color: rgba(255, 255, 255, 0.82);
+  }
+  .hero-actions .btn-ghost {
+    background: rgba(255, 255, 255, 0.16);
+    border: 2px solid rgba(255, 255, 255, 0.88);
+    color: #ffffff;
+    font-weight: 700;
+  }
+  .hero-actions .btn-ghost:hover {
+    background: rgba(255, 255, 255, 0.24);
+    border-color: #ffffff;
+  }
+  .hero-stat {
+    background: rgba(255, 255, 255, 0.16);
+    outline: 1px solid rgba(255, 255, 255, 0.28);
+    outline-offset: -1px;
+  }
+  .hero-stat-label {
+    color: rgba(255, 255, 255, 0.72);
+  }
 }
 
 @media (max-width: 640px) {
-  .hero-img-panel { height: 168px; }
   .hero-inner {
-    padding-top: 1.125rem;
-    padding-bottom: 1.375rem;
+    padding-top: 1.75rem;
+    padding-bottom: 2rem;
   }
   .hero-logo { height: 2.5rem; margin-bottom: 0.625rem; }
   .hero-slogan {
