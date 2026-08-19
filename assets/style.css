@@ -801,6 +801,24 @@ body {
   to   { opacity: 1; transform: none; }
 }
 
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-video {
+    display: none;
+  }
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .hero-copy > *,
   .page-hero-inner > *,
