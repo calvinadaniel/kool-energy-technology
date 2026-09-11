@@ -42,6 +42,7 @@
     }
   </script>
   <script defer src="https://unpkg.com/htmx.org@1.9.10"></script>
+  <script defer src="assets/reviews-carousel.js"></script>
   <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
   <script defer src="assets/a11y.js"></script>
   <link rel="stylesheet" href="assets/style.css" />
@@ -238,18 +239,364 @@
     </div>
   </section>
 
+  <!-- GOOGLE REVIEWS -->
+  <section
+    id="reviews"
+    class="reviews-section py-24"
+    x-data="reviewsCarousel()"
+    @mouseenter="pause()"
+    @mouseleave="resume()"
+    @focusin="pause()"
+    @focusout="resume()"
+  >
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="reviews-header">
+        <div>
+          <span class="overline-label">Google Reviews</span>
+          <h2 class="h-section">HEAR IT FROM OUR CUSTOMERS</h2>
+        </div>
+        <div class="reviews-nav" role="group" aria-label="Review carousel controls">
+          <button type="button" class="reviews-nav-btn" @click="prev()" aria-label="Previous reviews">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path d="M15 18l-6-6 6-6" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <button type="button" class="reviews-nav-btn" @click="next()" aria-label="Next reviews">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path d="M9 18l6-6-6-6" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="reviews-summary">
+        <div class="reviews-score">
+          <span class="reviews-score-num">5.0</span>
+          <span class="reviews-stars" aria-label="5 out of 5 stars">
+            <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 1.5l2.4 5.1 5.6.7-4.1 3.9 1.1 5.5L10 14.8 4.9 16.7l1.1-5.5L1.9 7.3l5.6-.7L10 1.5z"/></svg>
+            <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 1.5l2.4 5.1 5.6.7-4.1 3.9 1.1 5.5L10 14.8 4.9 16.7l1.1-5.5L1.9 7.3l5.6-.7L10 1.5z"/></svg>
+            <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 1.5l2.4 5.1 5.6.7-4.1 3.9 1.1 5.5L10 14.8 4.9 16.7l1.1-5.5L1.9 7.3l5.6-.7L10 1.5z"/></svg>
+            <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 1.5l2.4 5.1 5.6.7-4.1 3.9 1.1 5.5L10 14.8 4.9 16.7l1.1-5.5L1.9 7.3l5.6-.7L10 1.5z"/></svg>
+            <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 1.5l2.4 5.1 5.6.7-4.1 3.9 1.1 5.5L10 14.8 4.9 16.7l1.1-5.5L1.9 7.3l5.6-.7L10 1.5z"/></svg>
+          </span>
+        </div>
+        <p class="reviews-meta"><strong>24 Google reviews</strong> · Kool Energy Technology, LLC.</p>
+        <a
+          href="https://www.google.com/search?q=Kool+Energy+Technology+LLC+reviews"
+          class="btn-outline"
+          target="_blank"
+          rel="noopener noreferrer"
+        >See all on Google &rarr;</a>
+      </div>
+
+      <div
+        class="reviews-viewport"
+        x-ref="viewport"
+        @scroll.passive="onScroll()"
+        tabindex="0"
+        role="region"
+        aria-roledescription="carousel"
+        aria-label="Customer Google reviews"
+      >
+        <div class="reviews-track">
+        <article class="review-card">
+          <div class="review-card-top">
+            <div class="review-avatar" aria-hidden="true">DM</div>
+            <div>
+              <div class="review-author">David Mars</div>
+              <div class="review-source">Google · 5 stars · <time datetime="2026-02-10">Feb 10, 2026</time></div>
+            </div>
+          </div>
+          <div class="review-card-stars" aria-hidden="true"><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 1.5l2.4 5.1 5.6.7-4.1 3.9 1.1 5.5L10 14.8 4.9 16.7l1.1-5.5L1.9 7.3l5.6-.7L10 1.5z"/></svg><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 1.5l2.4 5.1 5.6.7-4.1 3.9 1.1 5.5L10 14.8 4.9 16.7l1.1-5.5L1.9 7.3l5.6-.7L10 1.5z"/></svg><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 1.5l2.4 5.1 5.6.7-4.1 3.9 1.1 5.5L10 14.8 4.9 16.7l1.1-5.5L1.9 7.3l5.6-.7L10 1.5z"/></svg><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 1.5l2.4 5.1 5.6.7-4.1 3.9 1.1 5.5L10 14.8 4.9 16.7l1.1-5.5L1.9 7.3l5.6-.7L10 1.5z"/></svg><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 1.5l2.4 5.1 5.6.7-4.1 3.9 1.1 5.5L10 14.8 4.9 16.7l1.1-5.5L1.9 7.3l5.6-.7L10 1.5z"/></svg></div>
+          <p class="review-quote">Rated 5 stars on Google.</p>
+        </article>
+        <article class="review-card">
+          <div class="review-card-top">
+            <div class="review-avatar" aria-hidden="true">KA</div>
+            <div>
+              <div class="review-author">kim asmundson</div>
+              <div class="review-source">Google · 5 stars · <time datetime="2026-02-04">Feb 4, 2026</time></div>
+            </div>
+          </div>
+          <div class="review-card-stars" aria-hidden="true"><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 1.5l2.4 5.1 5.6.7-4.1 3.9 1.1 5.5L10 14.8 4.9 16.7l1.1-5.5L1.9 7.3l5.6-.7L10 1.5z"/></svg><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 1.5l2.4 5.1 5.6.7-4.1 3.9 1.1 5.5L10 14.8 4.9 16.7l1.1-5.5L1.9 7.3l5.6-.7L10 1.5z"/></svg><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 1.5l2.4 5.1 5.6.7-4.1 3.9 1.1 5.5L10 14.8 4.9 16.7l1.1-5.5L1.9 7.3l5.6-.7L10 1.5z"/></svg><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 1.5l2.4 5.1 5.6.7-4.1 3.9 1.1 5.5L10 14.8 4.9 16.7l1.1-5.5L1.9 7.3l5.6-.7L10 1.5z"/></svg><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 1.5l2.4 5.1 5.6.7-4.1 3.9 1.1 5.5L10 14.8 4.9 16.7l1.1-5.5L1.9 7.3l5.6-.7L10 1.5z"/></svg></div>
+          <p class="review-quote">“The communication with Kool Energy was as good as we have ever experienced. They kept us informed every step of the way from the estimate to install. The unit they installed was perfect for our needs and they coordinated with the town on all the permits.”</p>
+        </article>
+        <article class="review-card">
+          <div class="review-card-top">
+            <div class="review-avatar" aria-hidden="true">DJ</div>
+            <div>
+              <div class="review-author">David Jakubowski</div>
+              <div class="review-source">Google · 5 stars · <time datetime="2025-08-16">Aug 16, 2025</time></div>
+            </div>
+          </div>
+          <div class="review-card-stars" aria-hidden="true"><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 1.5l2.4 5.1 5.6.7-4.1 3.9 1.1 5.5L10 14.8 4.9 16.7l1.1-5.5L1.9 7.3l5.6-.7L10 1.5z"/></svg><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 1.5l2.4 5.1 5.6.7-4.1 3.9 1.1 5.5L10 14.8 4.9 16.7l1.1-5.5L1.9 7.3l5.6-.7L10 1.5z"/></svg><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 1.5l2.4 5.1 5.6.7-4.1 3.9 1.1 5.5L10 14.8 4.9 16.7l1.1-5.5L1.9 7.3l5.6-.7L10 1.5z"/></svg><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 1.5l2.4 5.1 5.6.7-4.1 3.9 1.1 5.5L10 14.8 4.9 16.7l1.1-5.5L1.9 7.3l5.6-.7L10 1.5z"/></svg><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 1.5l2.4 5.1 5.6.7-4.1 3.9 1.1 5.5L10 14.8 4.9 16.7l1.1-5.5L1.9 7.3l5.6-.7L10 1.5z"/></svg></div>
+          <p class="review-quote">“Shaq is the bomb! Really appreciate how responsive and professional kool is. Saved the day on my wine cellar”</p>
+        </article>
+        <article class="review-card">
+          <div class="review-card-top">
+            <div class="review-avatar" aria-hidden="true">JC</div>
+            <div>
+              <div class="review-author">Jacqueline Capriles</div>
+              <div class="review-source">Google · 5 stars · <time datetime="2025-03-10">Mar 10, 2025</time></div>
+            </div>
+          </div>
+          <div class="review-card-stars" aria-hidden="true"><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 1.5l2.4 5.1 5.6.7-4.1 3.9 1.1 5.5L10 14.8 4.9 16.7l1.1-5.5L1.9 7.3l5.6-.7L10 1.5z"/></svg><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 1.5l2.4 5.1 5.6.7-4.1 3.9 1.1 5.5L10 14.8 4.9 16.7l1.1-5.5L1.9 7.3l5.6-.7L10 1.5z"/></svg><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 1.5l2.4 5.1 5.6.7-4.1 3.9 1.1 5.5L10 14.8 4.9 16.7l1.1-5.5L1.9 7.3l5.6-.7L10 1.5z"/></svg><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 1.5l2.4 5.1 5.6.7-4.1 3.9 1.1 5.5L10 14.8 4.9 16.7l1.1-5.5L1.9 7.3l5.6-.7L10 1.5z"/></svg><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 1.5l2.4 5.1 5.6.7-4.1 3.9 1.1 5.5L10 14.8 4.9 16.7l1.1-5.5L1.9 7.3l5.6-.7L10 1.5z"/></svg></div>
+          <p class="review-quote">“I had a great experience with Kool Energy. The quality of their work was excellent. They repaired my boiler’s condensation unit and stopped the leaking in my house almost immediately. The technicians were professional, knowledgeable, and efficient, and the owner was truly great…”</p>
+        </article>
+        <article class="review-card">
+          <div class="review-card-top">
+            <div class="review-avatar" aria-hidden="true">JH</div>
+            <div>
+              <div class="review-author">James Heyward</div>
+              <div class="review-source">Google · 5 stars · <time datetime="2025-03-07">Mar 7, 2025</time></div>
+            </div>
+          </div>
+          <div class="review-card-stars" aria-hidden="true"><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 1.5l2.4 5.1 5.6.7-4.1 3.9 1.1 5.5L10 14.8 4.9 16.7l1.1-5.5L1.9 7.3l5.6-.7L10 1.5z"/></svg><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 1.5l2.4 5.1 5.6.7-4.1 3.9 1.1 5.5L10 14.8 4.9 16.7l1.1-5.5L1.9 7.3l5.6-.7L10 1.5z"/></svg><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 1.5l2.4 5.1 5.6.7-4.1 3.9 1.1 5.5L10 14.8 4.9 16.7l1.1-5.5L1.9 7.3l5.6-.7L10 1.5z"/></svg><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 1.5l2.4 5.1 5.6.7-4.1 3.9 1.1 5.5L10 14.8 4.9 16.7l1.1-5.5L1.9 7.3l5.6-.7L10 1.5z"/></svg><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 1.5l2.4 5.1 5.6.7-4.1 3.9 1.1 5.5L10 14.8 4.9 16.7l1.1-5.5L1.9 7.3l5.6-.7L10 1.5z"/></svg></div>
+          <p class="review-quote">Rated 5 stars on Google.</p>
+        </article>
+        <article class="review-card">
+          <div class="review-card-top">
+            <div class="review-avatar" aria-hidden="true">CT</div>
+            <div>
+              <div class="review-author">cecilee Tornetta</div>
+              <div class="review-source">Google · 5 stars · <time datetime="2025-03-06">Mar 6, 2025</time></div>
+            </div>
+          </div>
+          <div class="review-card-stars" aria-hidden="true"><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 1.5l2.4 5.1 5.6.7-4.1 3.9 1.1 5.5L10 14.8 4.9 16.7l1.1-5.5L1.9 7.3l5.6-.7L10 1.5z"/></svg><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 1.5l2.4 5.1 5.6.7-4.1 3.9 1.1 5.5L10 14.8 4.9 16.7l1.1-5.5L1.9 7.3l5.6-.7L10 1.5z"/></svg><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 1.5l2.4 5.1 5.6.7-4.1 3.9 1.1 5.5L10 14.8 4.9 16.7l1.1-5.5L1.9 7.3l5.6-.7L10 1.5z"/></svg><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 1.5l2.4 5.1 5.6.7-4.1 3.9 1.1 5.5L10 14.8 4.9 16.7l1.1-5.5L1.9 7.3l5.6-.7L10 1.5z"/></svg><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 1.5l2.4 5.1 5.6.7-4.1 3.9 1.1 5.5L10 14.8 4.9 16.7l1.1-5.5L1.9 7.3l5.6-.7L10 1.5z"/></svg></div>
+          <p class="review-quote">“I have been using Kool energy for all my commercial HVAC needs for quite some time, and I couldn’t be more impressed. From their professionalism to their exceptional customer service, they have always gone above and beyond. Karl and his team are incredibly knowledgeable and…”</p>
+        </article>
+        <article class="review-card">
+          <div class="review-card-top">
+            <div class="review-avatar" aria-hidden="true">BM</div>
+            <div>
+              <div class="review-author">Barbara Miner-Irick</div>
+              <div class="review-source">Google · 5 stars · <time datetime="2025-02-27">Feb 27, 2025</time></div>
+            </div>
+          </div>
+          <div class="review-card-stars" aria-hidden="true"><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 1.5l2.4 5.1 5.6.7-4.1 3.9 1.1 5.5L10 14.8 4.9 16.7l1.1-5.5L1.9 7.3l5.6-.7L10 1.5z"/></svg><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 1.5l2.4 5.1 5.6.7-4.1 3.9 1.1 5.5L10 14.8 4.9 16.7l1.1-5.5L1.9 7.3l5.6-.7L10 1.5z"/></svg><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 1.5l2.4 5.1 5.6.7-4.1 3.9 1.1 5.5L10 14.8 4.9 16.7l1.1-5.5L1.9 7.3l5.6-.7L10 1.5z"/></svg><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 1.5l2.4 5.1 5.6.7-4.1 3.9 1.1 5.5L10 14.8 4.9 16.7l1.1-5.5L1.9 7.3l5.6-.7L10 1.5z"/></svg><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 1.5l2.4 5.1 5.6.7-4.1 3.9 1.1 5.5L10 14.8 4.9 16.7l1.1-5.5L1.9 7.3l5.6-.7L10 1.5z"/></svg></div>
+          <p class="review-quote">“Karl Sampson, owner is very easy to work with. He explains each step of the way and communicates his work process. End product is some of the best I have ever seen. Highly recommend Karl and his company Kool Energy”</p>
+        </article>
+        <article class="review-card">
+          <div class="review-card-top">
+            <div class="review-avatar" aria-hidden="true">JP</div>
+            <div>
+              <div class="review-author">Jason Paulson</div>
+              <div class="review-source">Google · 5 stars · <time datetime="2025-02-25">Feb 25, 2025</time></div>
+            </div>
+          </div>
+          <div class="review-card-stars" aria-hidden="true"><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 1.5l2.4 5.1 5.6.7-4.1 3.9 1.1 5.5L10 14.8 4.9 16.7l1.1-5.5L1.9 7.3l5.6-.7L10 1.5z"/></svg><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 1.5l2.4 5.1 5.6.7-4.1 3.9 1.1 5.5L10 14.8 4.9 16.7l1.1-5.5L1.9 7.3l5.6-.7L10 1.5z"/></svg><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 1.5l2.4 5.1 5.6.7-4.1 3.9 1.1 5.5L10 14.8 4.9 16.7l1.1-5.5L1.9 7.3l5.6-.7L10 1.5z"/></svg><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 1.5l2.4 5.1 5.6.7-4.1 3.9 1.1 5.5L10 14.8 4.9 16.7l1.1-5.5L1.9 7.3l5.6-.7L10 1.5z"/></svg><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 1.5l2.4 5.1 5.6.7-4.1 3.9 1.1 5.5L10 14.8 4.9 16.7l1.1-5.5L1.9 7.3l5.6-.7L10 1.5z"/></svg></div>
+          <p class="review-quote">“Kool Energy Technology is one of those few companies left that actually care about their work. Their workers are hardworking, knowledgeable, professional, dependable and punctual. I can't say enough good things about this company. If you want the job done right, use them. You…”</p>
+        </article>
+        <article class="review-card">
+          <div class="review-card-top">
+            <div class="review-avatar" aria-hidden="true">AC</div>
+            <div>
+              <div class="review-author">Agustin Caraballoso</div>
+              <div class="review-source">Google · 5 stars · <time datetime="2025-02-24">Feb 24, 2025</time></div>
+            </div>
+          </div>
+          <div class="review-card-stars" aria-hidden="true"><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 1.5l2.4 5.1 5.6.7-4.1 3.9 1.1 5.5L10 14.8 4.9 16.7l1.1-5.5L1.9 7.3l5.6-.7L10 1.5z"/></svg><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 1.5l2.4 5.1 5.6.7-4.1 3.9 1.1 5.5L10 14.8 4.9 16.7l1.1-5.5L1.9 7.3l5.6-.7L10 1.5z"/></svg><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 1.5l2.4 5.1 5.6.7-4.1 3.9 1.1 5.5L10 14.8 4.9 16.7l1.1-5.5L1.9 7.3l5.6-.7L10 1.5z"/></svg><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 1.5l2.4 5.1 5.6.7-4.1 3.9 1.1 5.5L10 14.8 4.9 16.7l1.1-5.5L1.9 7.3l5.6-.7L10 1.5z"/></svg><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 1.5l2.4 5.1 5.6.7-4.1 3.9 1.1 5.5L10 14.8 4.9 16.7l1.1-5.5L1.9 7.3l5.6-.7L10 1.5z"/></svg></div>
+          <p class="review-quote">“Very responsible and reliable company.”</p>
+        </article>
+        <article class="review-card">
+          <div class="review-card-top">
+            <div class="review-avatar" aria-hidden="true">SP</div>
+            <div>
+              <div class="review-author">Steve Pagan</div>
+              <div class="review-source">Google · 5 stars · <time datetime="2025-02-23">Feb 23, 2025</time></div>
+            </div>
+          </div>
+          <div class="review-card-stars" aria-hidden="true"><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 1.5l2.4 5.1 5.6.7-4.1 3.9 1.1 5.5L10 14.8 4.9 16.7l1.1-5.5L1.9 7.3l5.6-.7L10 1.5z"/></svg><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 1.5l2.4 5.1 5.6.7-4.1 3.9 1.1 5.5L10 14.8 4.9 16.7l1.1-5.5L1.9 7.3l5.6-.7L10 1.5z"/></svg><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 1.5l2.4 5.1 5.6.7-4.1 3.9 1.1 5.5L10 14.8 4.9 16.7l1.1-5.5L1.9 7.3l5.6-.7L10 1.5z"/></svg><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 1.5l2.4 5.1 5.6.7-4.1 3.9 1.1 5.5L10 14.8 4.9 16.7l1.1-5.5L1.9 7.3l5.6-.7L10 1.5z"/></svg><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 1.5l2.4 5.1 5.6.7-4.1 3.9 1.1 5.5L10 14.8 4.9 16.7l1.1-5.5L1.9 7.3l5.6-.7L10 1.5z"/></svg></div>
+          <p class="review-quote">“Kool Energy is one of the most professional HVAC companies I have ever dealt with! Punctual, understand your HVAC needs, and willing to Work with you to resolve your system issues! If you need HVAC services…call Karl!”</p>
+        </article>
+        <article class="review-card">
+          <div class="review-card-top">
+            <div class="review-avatar" aria-hidden="true">AB</div>
+            <div>
+              <div class="review-author">Aaron Bordes</div>
+              <div class="review-source">Google · 5 stars · <time datetime="2025-02-22">Feb 22, 2025</time></div>
+            </div>
+          </div>
+          <div class="review-card-stars" aria-hidden="true"><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 1.5l2.4 5.1 5.6.7-4.1 3.9 1.1 5.5L10 14.8 4.9 16.7l1.1-5.5L1.9 7.3l5.6-.7L10 1.5z"/></svg><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 1.5l2.4 5.1 5.6.7-4.1 3.9 1.1 5.5L10 14.8 4.9 16.7l1.1-5.5L1.9 7.3l5.6-.7L10 1.5z"/></svg><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 1.5l2.4 5.1 5.6.7-4.1 3.9 1.1 5.5L10 14.8 4.9 16.7l1.1-5.5L1.9 7.3l5.6-.7L10 1.5z"/></svg><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 1.5l2.4 5.1 5.6.7-4.1 3.9 1.1 5.5L10 14.8 4.9 16.7l1.1-5.5L1.9 7.3l5.6-.7L10 1.5z"/></svg><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 1.5l2.4 5.1 5.6.7-4.1 3.9 1.1 5.5L10 14.8 4.9 16.7l1.1-5.5L1.9 7.3l5.6-.7L10 1.5z"/></svg></div>
+          <p class="review-quote">“Kool Energy, was fast, efficient and very knowledgeable. I would highly recommend!! My first call for all my heating and cooling needs from now on!!”</p>
+        </article>
+        <article class="review-card">
+          <div class="review-card-top">
+            <div class="review-avatar" aria-hidden="true">EL</div>
+            <div>
+              <div class="review-author">Erica L</div>
+              <div class="review-source">Google · 5 stars · <time datetime="2025-02-19">Feb 19, 2025</time></div>
+            </div>
+          </div>
+          <div class="review-card-stars" aria-hidden="true"><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 1.5l2.4 5.1 5.6.7-4.1 3.9 1.1 5.5L10 14.8 4.9 16.7l1.1-5.5L1.9 7.3l5.6-.7L10 1.5z"/></svg><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 1.5l2.4 5.1 5.6.7-4.1 3.9 1.1 5.5L10 14.8 4.9 16.7l1.1-5.5L1.9 7.3l5.6-.7L10 1.5z"/></svg><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 1.5l2.4 5.1 5.6.7-4.1 3.9 1.1 5.5L10 14.8 4.9 16.7l1.1-5.5L1.9 7.3l5.6-.7L10 1.5z"/></svg><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 1.5l2.4 5.1 5.6.7-4.1 3.9 1.1 5.5L10 14.8 4.9 16.7l1.1-5.5L1.9 7.3l5.6-.7L10 1.5z"/></svg><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 1.5l2.4 5.1 5.6.7-4.1 3.9 1.1 5.5L10 14.8 4.9 16.7l1.1-5.5L1.9 7.3l5.6-.7L10 1.5z"/></svg></div>
+          <p class="review-quote">“Karl is soo helpful and knowledgeable. I recommend him and his team for any HVAC repair or maintenance. Thaaanks!!”</p>
+        </article>
+        <article class="review-card">
+          <div class="review-card-top">
+            <div class="review-avatar" aria-hidden="true">SS</div>
+            <div>
+              <div class="review-author">Stephany Saunders</div>
+              <div class="review-source">Google · 5 stars · <time datetime="2025-02-19">Feb 19, 2025</time></div>
+            </div>
+          </div>
+          <div class="review-card-stars" aria-hidden="true"><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 1.5l2.4 5.1 5.6.7-4.1 3.9 1.1 5.5L10 14.8 4.9 16.7l1.1-5.5L1.9 7.3l5.6-.7L10 1.5z"/></svg><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 1.5l2.4 5.1 5.6.7-4.1 3.9 1.1 5.5L10 14.8 4.9 16.7l1.1-5.5L1.9 7.3l5.6-.7L10 1.5z"/></svg><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 1.5l2.4 5.1 5.6.7-4.1 3.9 1.1 5.5L10 14.8 4.9 16.7l1.1-5.5L1.9 7.3l5.6-.7L10 1.5z"/></svg><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 1.5l2.4 5.1 5.6.7-4.1 3.9 1.1 5.5L10 14.8 4.9 16.7l1.1-5.5L1.9 7.3l5.6-.7L10 1.5z"/></svg><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 1.5l2.4 5.1 5.6.7-4.1 3.9 1.1 5.5L10 14.8 4.9 16.7l1.1-5.5L1.9 7.3l5.6-.7L10 1.5z"/></svg></div>
+          <p class="review-quote">“This company president and staff are very professional, courteous and hardworking! They are very knowledgeable of the HVAC business and would highly recommend their business to meet your needs and exceed your expectations!”</p>
+        </article>
+        <article class="review-card">
+          <div class="review-card-top">
+            <div class="review-avatar" aria-hidden="true">GG</div>
+            <div>
+              <div class="review-author">Geneva Greene</div>
+              <div class="review-source">Google · 5 stars · <time datetime="2025-02-18">Feb 18, 2025</time></div>
+            </div>
+          </div>
+          <div class="review-card-stars" aria-hidden="true"><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 1.5l2.4 5.1 5.6.7-4.1 3.9 1.1 5.5L10 14.8 4.9 16.7l1.1-5.5L1.9 7.3l5.6-.7L10 1.5z"/></svg><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 1.5l2.4 5.1 5.6.7-4.1 3.9 1.1 5.5L10 14.8 4.9 16.7l1.1-5.5L1.9 7.3l5.6-.7L10 1.5z"/></svg><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 1.5l2.4 5.1 5.6.7-4.1 3.9 1.1 5.5L10 14.8 4.9 16.7l1.1-5.5L1.9 7.3l5.6-.7L10 1.5z"/></svg><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 1.5l2.4 5.1 5.6.7-4.1 3.9 1.1 5.5L10 14.8 4.9 16.7l1.1-5.5L1.9 7.3l5.6-.7L10 1.5z"/></svg><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 1.5l2.4 5.1 5.6.7-4.1 3.9 1.1 5.5L10 14.8 4.9 16.7l1.1-5.5L1.9 7.3l5.6-.7L10 1.5z"/></svg></div>
+          <p class="review-quote">“I had an outstanding experience with Kool Energy Technology, LLC! From the initial consultation to the final service, their team demonstrated exceptional expertise and professionalism. They took the time to assess my HVAC needs, provided insightful recommendations, and explained…”</p>
+        </article>
+        <article class="review-card">
+          <div class="review-card-top">
+            <div class="review-avatar" aria-hidden="true">PP</div>
+            <div>
+              <div class="review-author">Phil Phillips</div>
+              <div class="review-source">Google · 5 stars · <time datetime="2024-12-30">Dec 30, 2024</time></div>
+            </div>
+          </div>
+          <div class="review-card-stars" aria-hidden="true"><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 1.5l2.4 5.1 5.6.7-4.1 3.9 1.1 5.5L10 14.8 4.9 16.7l1.1-5.5L1.9 7.3l5.6-.7L10 1.5z"/></svg><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 1.5l2.4 5.1 5.6.7-4.1 3.9 1.1 5.5L10 14.8 4.9 16.7l1.1-5.5L1.9 7.3l5.6-.7L10 1.5z"/></svg><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 1.5l2.4 5.1 5.6.7-4.1 3.9 1.1 5.5L10 14.8 4.9 16.7l1.1-5.5L1.9 7.3l5.6-.7L10 1.5z"/></svg><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 1.5l2.4 5.1 5.6.7-4.1 3.9 1.1 5.5L10 14.8 4.9 16.7l1.1-5.5L1.9 7.3l5.6-.7L10 1.5z"/></svg><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 1.5l2.4 5.1 5.6.7-4.1 3.9 1.1 5.5L10 14.8 4.9 16.7l1.1-5.5L1.9 7.3l5.6-.7L10 1.5z"/></svg></div>
+          <p class="review-quote">“They were great. They figured out and repaired something the plumber who installed my boiler could never figure out THANKS”</p>
+        </article>
+        <article class="review-card">
+          <div class="review-card-top">
+            <div class="review-avatar" aria-hidden="true">MS</div>
+            <div>
+              <div class="review-author">Maria Salerno</div>
+              <div class="review-source">Google · 5 stars · <time datetime="2024-12-24">Dec 24, 2024</time></div>
+            </div>
+          </div>
+          <div class="review-card-stars" aria-hidden="true"><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 1.5l2.4 5.1 5.6.7-4.1 3.9 1.1 5.5L10 14.8 4.9 16.7l1.1-5.5L1.9 7.3l5.6-.7L10 1.5z"/></svg><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 1.5l2.4 5.1 5.6.7-4.1 3.9 1.1 5.5L10 14.8 4.9 16.7l1.1-5.5L1.9 7.3l5.6-.7L10 1.5z"/></svg><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 1.5l2.4 5.1 5.6.7-4.1 3.9 1.1 5.5L10 14.8 4.9 16.7l1.1-5.5L1.9 7.3l5.6-.7L10 1.5z"/></svg><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 1.5l2.4 5.1 5.6.7-4.1 3.9 1.1 5.5L10 14.8 4.9 16.7l1.1-5.5L1.9 7.3l5.6-.7L10 1.5z"/></svg><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 1.5l2.4 5.1 5.6.7-4.1 3.9 1.1 5.5L10 14.8 4.9 16.7l1.1-5.5L1.9 7.3l5.6-.7L10 1.5z"/></svg></div>
+          <p class="review-quote">“I was Having trouble with my boiler. I called them. They answered my call fast and were extremely professional. The workers were extremely respectful, professional, and answered my questions. They got straight to the problem and fixed my boiler. I highly recommend them!”</p>
+        </article>
+        <article class="review-card">
+          <div class="review-card-top">
+            <div class="review-avatar" aria-hidden="true">CT</div>
+            <div>
+              <div class="review-author">Chad Thompson</div>
+              <div class="review-source">Google · 5 stars · <time datetime="2024-08-20">Aug 20, 2024</time></div>
+            </div>
+          </div>
+          <div class="review-card-stars" aria-hidden="true"><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 1.5l2.4 5.1 5.6.7-4.1 3.9 1.1 5.5L10 14.8 4.9 16.7l1.1-5.5L1.9 7.3l5.6-.7L10 1.5z"/></svg><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 1.5l2.4 5.1 5.6.7-4.1 3.9 1.1 5.5L10 14.8 4.9 16.7l1.1-5.5L1.9 7.3l5.6-.7L10 1.5z"/></svg><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 1.5l2.4 5.1 5.6.7-4.1 3.9 1.1 5.5L10 14.8 4.9 16.7l1.1-5.5L1.9 7.3l5.6-.7L10 1.5z"/></svg><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 1.5l2.4 5.1 5.6.7-4.1 3.9 1.1 5.5L10 14.8 4.9 16.7l1.1-5.5L1.9 7.3l5.6-.7L10 1.5z"/></svg><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 1.5l2.4 5.1 5.6.7-4.1 3.9 1.1 5.5L10 14.8 4.9 16.7l1.1-5.5L1.9 7.3l5.6-.7L10 1.5z"/></svg></div>
+          <p class="review-quote">“One of the most knowledgeable and professional HVAC contractors you will find. We have worked with them on a number of projects and they do exceptional work. They are honest and upfront, good communicators and know how to set the proper expectations so everyone stays on the same…”</p>
+        </article>
+        <article class="review-card">
+          <div class="review-card-top">
+            <div class="review-avatar" aria-hidden="true">TV</div>
+            <div>
+              <div class="review-author">Tony Ventresca</div>
+              <div class="review-source">Google · 5 stars · <time datetime="2024-06-13">Jun 13, 2024</time></div>
+            </div>
+          </div>
+          <div class="review-card-stars" aria-hidden="true"><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 1.5l2.4 5.1 5.6.7-4.1 3.9 1.1 5.5L10 14.8 4.9 16.7l1.1-5.5L1.9 7.3l5.6-.7L10 1.5z"/></svg><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 1.5l2.4 5.1 5.6.7-4.1 3.9 1.1 5.5L10 14.8 4.9 16.7l1.1-5.5L1.9 7.3l5.6-.7L10 1.5z"/></svg><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 1.5l2.4 5.1 5.6.7-4.1 3.9 1.1 5.5L10 14.8 4.9 16.7l1.1-5.5L1.9 7.3l5.6-.7L10 1.5z"/></svg><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 1.5l2.4 5.1 5.6.7-4.1 3.9 1.1 5.5L10 14.8 4.9 16.7l1.1-5.5L1.9 7.3l5.6-.7L10 1.5z"/></svg><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 1.5l2.4 5.1 5.6.7-4.1 3.9 1.1 5.5L10 14.8 4.9 16.7l1.1-5.5L1.9 7.3l5.6-.7L10 1.5z"/></svg></div>
+          <p class="review-quote">“Karl and his team and the most professional, knowledgeable, and nicest business you will ever work with! They are always a pleasure to deal with. Highly recommended for all of your HVAC needs!!”</p>
+        </article>
+        <article class="review-card">
+          <div class="review-card-top">
+            <div class="review-avatar" aria-hidden="true">JB</div>
+            <div>
+              <div class="review-author">Jameson Baker</div>
+              <div class="review-source">Google · 5 stars · <time datetime="2024-06-13">Jun 13, 2024</time></div>
+            </div>
+          </div>
+          <div class="review-card-stars" aria-hidden="true"><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 1.5l2.4 5.1 5.6.7-4.1 3.9 1.1 5.5L10 14.8 4.9 16.7l1.1-5.5L1.9 7.3l5.6-.7L10 1.5z"/></svg><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 1.5l2.4 5.1 5.6.7-4.1 3.9 1.1 5.5L10 14.8 4.9 16.7l1.1-5.5L1.9 7.3l5.6-.7L10 1.5z"/></svg><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 1.5l2.4 5.1 5.6.7-4.1 3.9 1.1 5.5L10 14.8 4.9 16.7l1.1-5.5L1.9 7.3l5.6-.7L10 1.5z"/></svg><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 1.5l2.4 5.1 5.6.7-4.1 3.9 1.1 5.5L10 14.8 4.9 16.7l1.1-5.5L1.9 7.3l5.6-.7L10 1.5z"/></svg><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 1.5l2.4 5.1 5.6.7-4.1 3.9 1.1 5.5L10 14.8 4.9 16.7l1.1-5.5L1.9 7.3l5.6-.7L10 1.5z"/></svg></div>
+          <p class="review-quote">“I’ve had nothing but success with Kool taking care of all my hvac service needs”</p>
+        </article>
+        <article class="review-card">
+          <div class="review-card-top">
+            <div class="review-avatar" aria-hidden="true">BF</div>
+            <div>
+              <div class="review-author">Brandon Forrest</div>
+              <div class="review-source">Google · 5 stars · <time datetime="2021-03-16">Mar 16, 2021</time></div>
+            </div>
+          </div>
+          <div class="review-card-stars" aria-hidden="true"><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 1.5l2.4 5.1 5.6.7-4.1 3.9 1.1 5.5L10 14.8 4.9 16.7l1.1-5.5L1.9 7.3l5.6-.7L10 1.5z"/></svg><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 1.5l2.4 5.1 5.6.7-4.1 3.9 1.1 5.5L10 14.8 4.9 16.7l1.1-5.5L1.9 7.3l5.6-.7L10 1.5z"/></svg><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 1.5l2.4 5.1 5.6.7-4.1 3.9 1.1 5.5L10 14.8 4.9 16.7l1.1-5.5L1.9 7.3l5.6-.7L10 1.5z"/></svg><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 1.5l2.4 5.1 5.6.7-4.1 3.9 1.1 5.5L10 14.8 4.9 16.7l1.1-5.5L1.9 7.3l5.6-.7L10 1.5z"/></svg><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 1.5l2.4 5.1 5.6.7-4.1 3.9 1.1 5.5L10 14.8 4.9 16.7l1.1-5.5L1.9 7.3l5.6-.7L10 1.5z"/></svg></div>
+          <p class="review-quote">“Karl and his team are the best in the business! Very professional and genuinely take care of the needs of the customer. Had Erik come take a look at my central air unit and he was very thorough and efficient.”</p>
+        </article>
+        <article class="review-card">
+          <div class="review-card-top">
+            <div class="review-avatar" aria-hidden="true">EG</div>
+            <div>
+              <div class="review-author">ELENA GIANNONE</div>
+              <div class="review-source">Google · 5 stars · <time datetime="2020-12-13">Dec 13, 2020</time></div>
+            </div>
+          </div>
+          <div class="review-card-stars" aria-hidden="true"><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 1.5l2.4 5.1 5.6.7-4.1 3.9 1.1 5.5L10 14.8 4.9 16.7l1.1-5.5L1.9 7.3l5.6-.7L10 1.5z"/></svg><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 1.5l2.4 5.1 5.6.7-4.1 3.9 1.1 5.5L10 14.8 4.9 16.7l1.1-5.5L1.9 7.3l5.6-.7L10 1.5z"/></svg><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 1.5l2.4 5.1 5.6.7-4.1 3.9 1.1 5.5L10 14.8 4.9 16.7l1.1-5.5L1.9 7.3l5.6-.7L10 1.5z"/></svg><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 1.5l2.4 5.1 5.6.7-4.1 3.9 1.1 5.5L10 14.8 4.9 16.7l1.1-5.5L1.9 7.3l5.6-.7L10 1.5z"/></svg><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 1.5l2.4 5.1 5.6.7-4.1 3.9 1.1 5.5L10 14.8 4.9 16.7l1.1-5.5L1.9 7.3l5.6-.7L10 1.5z"/></svg></div>
+          <p class="review-quote">“Karl and his team were very professional and excellent with communication. They secured all the needed permits to make sure the job was done right. I am very pleased and will use Kool Energy Technology again!”</p>
+        </article>
+        <article class="review-card">
+          <div class="review-card-top">
+            <div class="review-avatar" aria-hidden="true">DM</div>
+            <div>
+              <div class="review-author">David Molin</div>
+              <div class="review-source">Google · 5 stars · <time datetime="2020-12-12">Dec 12, 2020</time></div>
+            </div>
+          </div>
+          <div class="review-card-stars" aria-hidden="true"><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 1.5l2.4 5.1 5.6.7-4.1 3.9 1.1 5.5L10 14.8 4.9 16.7l1.1-5.5L1.9 7.3l5.6-.7L10 1.5z"/></svg><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 1.5l2.4 5.1 5.6.7-4.1 3.9 1.1 5.5L10 14.8 4.9 16.7l1.1-5.5L1.9 7.3l5.6-.7L10 1.5z"/></svg><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 1.5l2.4 5.1 5.6.7-4.1 3.9 1.1 5.5L10 14.8 4.9 16.7l1.1-5.5L1.9 7.3l5.6-.7L10 1.5z"/></svg><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 1.5l2.4 5.1 5.6.7-4.1 3.9 1.1 5.5L10 14.8 4.9 16.7l1.1-5.5L1.9 7.3l5.6-.7L10 1.5z"/></svg><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 1.5l2.4 5.1 5.6.7-4.1 3.9 1.1 5.5L10 14.8 4.9 16.7l1.1-5.5L1.9 7.3l5.6-.7L10 1.5z"/></svg></div>
+          <p class="review-quote">“The premises is comfortable and thoroughly ventilated. Kool energy provides round the clock support and exceptional service. Kool energy provides recommendations that is safe and cost effective. They are highly recommended for your residential and commercial place.”</p>
+        </article>
+        <article class="review-card">
+          <div class="review-card-top">
+            <div class="review-avatar" aria-hidden="true">DZ</div>
+            <div>
+              <div class="review-author">Dwayne Ziegler</div>
+              <div class="review-source">Google · 5 stars · <time datetime="2020-12-12">Dec 12, 2020</time></div>
+            </div>
+          </div>
+          <div class="review-card-stars" aria-hidden="true"><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 1.5l2.4 5.1 5.6.7-4.1 3.9 1.1 5.5L10 14.8 4.9 16.7l1.1-5.5L1.9 7.3l5.6-.7L10 1.5z"/></svg><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 1.5l2.4 5.1 5.6.7-4.1 3.9 1.1 5.5L10 14.8 4.9 16.7l1.1-5.5L1.9 7.3l5.6-.7L10 1.5z"/></svg><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 1.5l2.4 5.1 5.6.7-4.1 3.9 1.1 5.5L10 14.8 4.9 16.7l1.1-5.5L1.9 7.3l5.6-.7L10 1.5z"/></svg><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 1.5l2.4 5.1 5.6.7-4.1 3.9 1.1 5.5L10 14.8 4.9 16.7l1.1-5.5L1.9 7.3l5.6-.7L10 1.5z"/></svg><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 1.5l2.4 5.1 5.6.7-4.1 3.9 1.1 5.5L10 14.8 4.9 16.7l1.1-5.5L1.9 7.3l5.6-.7L10 1.5z"/></svg></div>
+          <p class="review-quote">“My furnace had to be replaced. I was informed by Kool Energy that I had a lifetime warranty on the furnace. Whew, that saved me $2K. Everything was done professionally and efficiently. Constant communication on arrival time. Furnace installed is more energy efficient. Everything…”</p>
+        </article>
+        <article class="review-card">
+          <div class="review-card-top">
+            <div class="review-avatar" aria-hidden="true">RM</div>
+            <div>
+              <div class="review-author">Ross Muscolino</div>
+              <div class="review-source">Google · 5 stars · <time datetime="2020-12-12">Dec 12, 2020</time></div>
+            </div>
+          </div>
+          <div class="review-card-stars" aria-hidden="true"><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 1.5l2.4 5.1 5.6.7-4.1 3.9 1.1 5.5L10 14.8 4.9 16.7l1.1-5.5L1.9 7.3l5.6-.7L10 1.5z"/></svg><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 1.5l2.4 5.1 5.6.7-4.1 3.9 1.1 5.5L10 14.8 4.9 16.7l1.1-5.5L1.9 7.3l5.6-.7L10 1.5z"/></svg><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 1.5l2.4 5.1 5.6.7-4.1 3.9 1.1 5.5L10 14.8 4.9 16.7l1.1-5.5L1.9 7.3l5.6-.7L10 1.5z"/></svg><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 1.5l2.4 5.1 5.6.7-4.1 3.9 1.1 5.5L10 14.8 4.9 16.7l1.1-5.5L1.9 7.3l5.6-.7L10 1.5z"/></svg><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 1.5l2.4 5.1 5.6.7-4.1 3.9 1.1 5.5L10 14.8 4.9 16.7l1.1-5.5L1.9 7.3l5.6-.7L10 1.5z"/></svg></div>
+          <p class="review-quote">Rated 5 stars on Google.</p>
+        </article>
+        </div>
+      </div>
+
+      <div class="reviews-footer">
+        <p class="reviews-page" x-text="pageLabel" aria-live="polite"></p>
+        <div class="reviews-dots" role="tablist" aria-label="Review pages">
+          <template x-for="page in pageCount" :key="page">
+            <button
+              type="button"
+              class="reviews-dot"
+              :class="{ 'is-active': page - 1 === pageIndex }"
+              :aria-label="'Go to review page ' + page"
+              :aria-current="page - 1 === pageIndex ? 'true' : null"
+              @click="goToPage(page - 1)"
+            ></button>
+          </template>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- CTA BANNER -->
   <section class="cta-section">
     <div class="max-w-3xl mx-auto text-center relative z-10">
       <h2 class="h-cta mb-4">READY TO GET STARTED?</h2>
       <p style="color:rgba(255,255,255,0.6);" class="text-lg mb-10">Talk with a team that knows commercial HVAC — whether the job is a facility or a home.</p>
       <a href="service-request/" class="btn-cta">Schedule a Service Call</a>
+      <p class="cta-legal">
+        <a href="terms-and-conditions/">Terms and Conditions</a>
+        <span aria-hidden="true">·</span>
+        <a href="privacy-policy/">Privacy Policy</a>
+      </p>
     </div>
   </section>
 
   <!-- FOOTER -->
   <footer class="footer-bar">
-    <div class="max-w-7xl mx-auto px-6 py-14 grid md:grid-cols-3 gap-10">
+    <div class="max-w-7xl mx-auto px-6 py-14 grid md:grid-cols-4 gap-10">
       <div>
         <img src="assets/logo.png" alt="Kool Energy Technology" class="h-10 w-auto mb-4" />
         <p class="text-sm leading-relaxed" style="color:rgba(255,255,255,0.42);">New York HVAC specialists with deep commercial experience. Serving the Tri-State Area.</p>
@@ -262,6 +609,13 @@
           <li><a href="about/" class="footer-link">About</a></li>
           <li><a href="instagram/" class="footer-link">Instagram</a></li>
           <li><a href="service-request/" class="footer-link">Request Service</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="footer-heading">Legal</h4>
+        <ul class="space-y-2">
+          <li><a href="terms-and-conditions/" class="footer-link">Terms and Conditions</a></li>
+          <li><a href="privacy-policy/" class="footer-link">Privacy Policy</a></li>
         </ul>
       </div>
       <div>
