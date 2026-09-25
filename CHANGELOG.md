@@ -2,6 +2,18 @@
 
 All notable changes to the Kool Energy Technology website are documented here.
 
+## [1.3.0] — 2026-09-25
+
+Footer Quick Links now include the Shopify equipment store.
+
+**Live:** https://calvinadaniel.github.io/kool-energy-technology/
+
+### Footer
+
+- Added an Equipment Store Quick Link on all marketing pages, opening the Shopify store in a new tab
+
+[1.3.0]: https://github.com/calvinadaniel/kool-energy-technology/releases/tag/v1.3.0
+
 ## [1.2.1] — 2026-08-13
 
 Service area copy now covers the Tri-State Area.
