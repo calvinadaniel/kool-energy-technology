@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Design review: Services page layout — Kool Energy Technology</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <meta name="description" content="Compare three layouts for the Kool Energy Technology services page." />
+  <meta name="theme-color" content="#112581" />
+  <link rel="icon" href="../../assets/favicon.ico" sizes="any" />
+  <link rel="icon" type="image/png" href="../../assets/favicon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            display: ['"Manrope"', 'sans-serif'],
+            sans:    ['"Inter"',   'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="../../assets/style.css" />
+  <style>
+    .rv-top {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: var(--surface-bright);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      box-shadow: 0 1px 0 var(--outline-variant);
+    }
+    .rv-top-meta {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--on-surface-muted);
+    }
+    .rv-top-meta strong { color: var(--primary); font-weight: 700; }
+
+    .rv-hero-lede {
+      max-width: 40rem;
+      margin-top: 1.25rem;
+      font-size: 1.05rem;
+      line-height: 1.7;
+      color: rgba(255, 255, 255, 0.72);
+    }
+    .rv-jump {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 2.25rem;
+    }
+    .rv-jump a {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.6rem 1rem 0.6rem 0.6rem;
+      border-radius: 0.375rem;
+      background: rgba(255, 255, 255, 0.08);
+      color: #fff;
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+    .rv-jump a:hover { background: rgba(255, 255, 255, 0.16); }
+    .rv-jump a:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
+    .rv-jump b {
+      display: grid;
+      place-items: center;
+      width: 1.75rem;
+      height: 1.75rem;
+      border-radius: 0.25rem;
+      background: #fff;
+      color: var(--primary);
+      font-family: 'Manrope', sans-serif;
+      font-weight: 800;
+      font-size: 0.85rem;
+    }
+
+    .rv-option {
+      display: grid;
+      grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+      gap: 5rem;
+      align-items: center;
+      padding: 6rem 0;
+      scroll-margin-top: 4rem;
+    }
+    .rv-option + .rv-option { border-top: 1px solid var(--outline-variant); }
+    .rv-option.reverse { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); }
+    .rv-option.reverse .rv-copy { order: 2; }
+    .rv-option.reverse .rv-media { order: 1; }
+
+    .rv-letter {
+      font-family: 'Manrope', sans-serif;
+      font-weight: 800;
+      font-size: 5rem;
+      line-height: 1;
+      letter-spacing: -0.04em;
+      color: rgba(17, 37, 129, 0.08);
+      margin-bottom: -1rem;
+    }
+    .rv-title { text-transform: uppercase; margin-bottom: 1rem; }
+    .rv-desc {
+      font-size: 1rem;
+      line-height: 1.75;
+      color: var(--on-surface-variant);
+      margin-bottom: 2rem;
+      text-wrap: pretty;
+    }
+    .rv-facts {
+      display: grid;
+      gap: 1.25rem;
+      margin-bottom: 2.25rem;
+    }
+    .rv-facts dt {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--secondary);
+      margin-bottom: 0.35rem;
+    }
+    .rv-facts dd {
+      font-size: 0.92rem;
+      line-height: 1.6;
+      color: var(--on-surface-variant);
+    }
+    .rv-open {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    .rv-open svg { width: 0.95rem; height: 0.95rem; }
+
+    .rv-media {
+      position: relative;
+      padding: 0 6% 3rem 0;
+    }
+    .rv-option.reverse .rv-media { padding: 0 0 3rem 6%; }
+    .rv-desktop {
+      margin: 0;
+      border-radius: 0.375rem;
+      overflow: hidden;
+      box-shadow: var(--shadow-md);
+      background: var(--surface-lowest);
+    }
+    .rv-desktop-bar {
+      display: flex;
+      gap: 0.35rem;
+      padding: 0.6rem 0.8rem;
+      background: var(--surface-high);
+    }
+    .rv-desktop-bar span {
+      width: 0.5rem;
+      height: 0.5rem;
+      border-radius: 50%;
+      background: rgba(27, 27, 33, 0.18);
+    }
+    .rv-desktop img { display: block; width: 100%; height: auto; }
+    .rv-phone {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      width: 24%;
+      margin: 0;
+      padding: 5px;
+      border-radius: 0.75rem;
+      background: var(--on-surface);
+      box-shadow: 0 18px 40px rgba(27, 27, 33, 0.28);
+    }
+    .rv-option.reverse .rv-phone { right: auto; left: 0; }
+    .rv-phone img { display: block; width: 100%; height: auto; border-radius: 0.5rem; }
+
+    .rv-compare-wrap { overflow-x: auto; }
+    .rv-compare {
+      width: 100%;
+      min-width: 40rem;
+      border-collapse: separate;
+      border-spacing: 0;
+      font-size: 0.92rem;
+    }
+    .rv-compare th,
+    .rv-compare td {
+      padding: 1.1rem 1.25rem;
+      text-align: left;
+      vertical-align: top;
+    }
+    .rv-compare thead th {
+      font-family: 'Manrope', sans-serif;
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: var(--on-surface);
+    }
+    .rv-compare thead th span {
+      display: block;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--secondary);
+      margin-bottom: 0.25rem;
+    }
+    .rv-compare tbody th {
+      font-weight: 600;
+      color: var(--on-surface);
+      width: 28%;
+    }
+    .rv-compare tbody td { color: var(--on-surface-variant); }
+    .rv-compare tbody tr:nth-child(odd) > * { background: var(--surface-lowest); }
+    .rv-compare tbody tr:nth-child(odd) > :first-child { border-radius: 0.375rem 0 0 0.375rem; }
+    .rv-compare tbody tr:nth-child(odd) > :last-child { border-radius: 0 0.375rem 0.375rem 0; }
+
+    @media (max-width: 1023px) {
+      .rv-option, .rv-option.reverse { grid-template-columns: minmax(0, 1fr); gap: 3rem; padding: 4rem 0; }
+      .rv-option.reverse .rv-copy { order: 1; }
+      .rv-option.reverse .rv-media { order: 2; padding: 0 6% 3rem 0; }
+      .rv-option.reverse .rv-phone { left: auto; right: 0; }
+    }
+    @media (max-width: 640px) {
+      .rv-top-meta .rv-date { display: none; }
+      .rv-letter { font-size: 3.75rem; margin-bottom: -0.6rem; }
+      .rv-phone { width: 30%; padding: 3px; border-radius: 0.5rem; }
+      .rv-phone img { border-radius: 0.35rem; }
+      .rv-media, .rv-option.reverse .rv-media { padding: 0 8% 2.5rem 0; }
+    }
+  </style>
+</head>
+<body class="font-sans">
+
+  <header class="rv-top">
+    <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between gap-4">
+      <a href="../../" class="shrink-0">
+        <img src="../../assets/logo.png" alt="Kool Energy Technology home" class="h-9 w-auto" />
+      </a>
+      <p class="rv-top-meta"><strong>Design review</strong><span class="rv-date"> · October 2, 2026</span></p>
+    </div>
+  </header>
+
+  <main>
+    <section class="page-hero">
+      <div class="page-hero-inner max-w-7xl mx-auto">
+        <span class="overline-label-light">Design review · Services page</span>
+        <h1 class="h-page">PICK A LAYOUT</h1>
+        <p class="rv-hero-lede">We designed two new ways to present your six services. Compare them with the current page, open each live preview to try it, and tell us which one you prefer.</p>
+        <nav class="rv-jump" aria-label="Options on this page">
+          <a href="#option-a"><b>A</b>Current: stacked rows</a>
+          <a href="#option-b"><b>B</b>New: accordion</a>
+          <a href="#option-c"><b>C</b>New: tabs</a>
+        </nav>
+      </div>
+    </section>
+
+    <section style="background:var(--surface);">
+      <div class="max-w-7xl mx-auto px-6">
+
+        <article class="rv-option" id="option-a" aria-labelledby="option-a-title">
+          <div class="rv-copy">
+            <div class="rv-letter" aria-hidden="true">A</div>
+            <span class="overline-label">Option A · Current page</span>
+            <h2 class="h-section rv-title" id="option-a-title">Stacked rows</h2>
+            <span class="section-rule"></span>
+            <p class="rv-desc">All six services appear one after another. Each row pairs a large photo with the description and the list of what's included, alternating sides as visitors scroll.</p>
+            <dl class="rv-facts">
+              <div>
+                <dt>Works well for</dt>
+                <dd>Visitors who read the whole page, and showing off every field photo at full size.</dd>
+              </div>
+              <div>
+                <dt>Trade-off</dt>
+                <dd>The longest page, especially on phones. Services near the end are easy to miss.</dd>
+              </div>
+            </dl>
+            <a href="../../services/" class="btn-primary rv-open" target="_blank" rel="noopener">Open live preview <span class="visually-hidden">of option A (opens in a new tab)</span><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5h5v5M19 5l-8 8M10 7H6a1 1 0 00-1 1v10a1 1 0 001 1h10a1 1 0 001-1v-4"/></svg></a>
+          </div>
+          <div class="rv-media">
+            <figure class="rv-desktop">
+              <div class="rv-desktop-bar" aria-hidden="true"><span></span><span></span><span></span></div>
+              <img src="img/option-a-current-desktop.jpg" width="1440" height="900" alt="Option A on desktop: Air Conditioning row with description and bullet list on the left and a large photo on the right, followed by the Heating Systems row." loading="lazy" />
+            </figure>
+            <figure class="rv-phone">
+              <img src="img/option-a-current-mobile.jpg" width="390" height="844" alt="Option A on a phone: the same rows stacked vertically." loading="lazy" />
+            </figure>
+          </div>
+        </article>
+
+        <article class="rv-option reverse" id="option-b" aria-labelledby="option-b-title">
+          <div class="rv-copy">
+            <div class="rv-letter" aria-hidden="true">B</div>
+            <span class="overline-label">Option B · New</span>
+            <h2 class="h-section rv-title" id="option-b-title">Accordion</h2>
+            <span class="section-rule"></span>
+            <p class="rv-desc">Services appear as a compact numbered list, each with a one-line preview of its specialties. Visitors open the ones they care about to see the full description, photo, and what's included. Several can be open at once, and <strong>Expand all</strong> shows everything.</p>
+            <dl class="rv-facts">
+              <div>
+                <dt>Works well for</dt>
+                <dd>Scanning all six services at a glance, and keeping the page short on phones.</dd>
+              </div>
+              <div>
+                <dt>Trade-off</dt>
+                <dd>Photos and details stay hidden until a visitor opens a service.</dd>
+              </div>
+            </dl>
+            <a href="accordion.html" class="btn-primary rv-open" target="_blank" rel="noopener">Open live preview <span class="visually-hidden">of option B (opens in a new tab)</span><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5h5v5M19 5l-8 8M10 7H6a1 1 0 00-1 1v10a1 1 0 001 1h10a1 1 0 001-1v-4"/></svg></a>
+          </div>
+          <div class="rv-media">
+            <figure class="rv-desktop">
+              <div class="rv-desktop-bar" aria-hidden="true"><span></span><span></span><span></span></div>
+              <img src="img/option-b-accordion-desktop.jpg" width="1440" height="900" alt="Option B on desktop: Air Conditioning expanded into a white card with description, included list, and photo; Heating Systems collapsed with a one-line preview." loading="lazy" />
+            </figure>
+            <figure class="rv-phone">
+              <img src="img/option-b-accordion-mobile.jpg" width="390" height="844" alt="Option B on a phone: the expanded service shows its photo above the description." loading="lazy" />
+            </figure>
+          </div>
+        </article>
+
+        <article class="rv-option" id="option-c" aria-labelledby="option-c-title">
+          <div class="rv-copy">
+            <div class="rv-letter" aria-hidden="true">C</div>
+            <span class="overline-label">Option C · New</span>
+            <h2 class="h-section rv-title" id="option-c-title">Tabs</h2>
+            <span class="section-rule"></span>
+            <p class="rv-desc">A numbered menu lists every service. Selecting one shows its photo and details in a large panel, and <strong>Next service</strong> steps through them in order. On phones, the menu becomes a strip that visitors swipe sideways.</p>
+            <dl class="rv-facts">
+              <div>
+                <dt>Works well for</dt>
+                <dd>Focusing on one service at a time with the largest photography of the three options.</dd>
+              </div>
+              <div>
+                <dt>Trade-off</dt>
+                <dd>Only one service is visible at a time, so visitors must select each tab to compare.</dd>
+              </div>
+            </dl>
+            <a href="tabs.html" class="btn-primary rv-open" target="_blank" rel="noopener">Open live preview <span class="visually-hidden">of option C (opens in a new tab)</span><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5h5v5M19 5l-8 8M10 7H6a1 1 0 00-1 1v10a1 1 0 001 1h10a1 1 0 001-1v-4"/></svg></a>
+          </div>
+          <div class="rv-media">
+            <figure class="rv-desktop">
+              <div class="rv-desktop-bar" aria-hidden="true"><span></span><span></span><span></span></div>
+              <img src="img/option-c-tabs-desktop.jpg" width="1440" height="900" alt="Option C on desktop: a vertical list of six numbered tabs with Air Conditioning selected, next to a large photo and the service details." loading="lazy" />
+            </figure>
+            <figure class="rv-phone">
+              <img src="img/option-c-tabs-mobile.jpg" width="390" height="844" alt="Option C on a phone: a sideways-scrolling tab strip above the selected service's photo and description." loading="lazy" />
+            </figure>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <section style="background:var(--surface-low);" class="py-20" aria-labelledby="compare-title">
+      <div class="max-w-5xl mx-auto px-6">
+        <span class="overline-label">Side by side</span>
+        <h2 class="h-section rv-title" id="compare-title">How they compare</h2>
+        <span class="section-rule"></span>
+        <div class="rv-compare-wrap">
+          <table class="rv-compare">
+            <thead>
+              <tr>
+                <td></td>
+                <th scope="col"><span>A</span>Stacked rows</th>
+                <th scope="col"><span>B</span>Accordion</th>
+                <th scope="col"><span>C</span>Tabs</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">See all six service names without scrolling far</th>
+                <td>No</td>
+                <td>Yes</td>
+                <td>Yes</td>
+              </tr>
+              <tr>
+                <th scope="row">Details visible without a click</th>
+                <td>All services</td>
+                <td>First service only</td>
+                <td>One service at a time</td>
+              </tr>
+              <tr>
+                <th scope="row">Page length on phones</th>
+                <td>Longest</td>
+                <td>Shortest</td>
+                <td>Medium</td>
+              </tr>
+              <tr>
+                <th scope="row">Photo size</th>
+                <td>Large</td>
+                <td>Medium</td>
+                <td>Largest</td>
+              </tr>
+              <tr>
+                <th scope="row">Content and photos</th>
+                <td colspan="3">Identical in all three options. Only the layout changes.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta-section" aria-labelledby="choose-title">
+      <div class="max-w-3xl mx-auto text-center relative z-10">
+        <h2 class="h-cta mb-4" id="choose-title">READY TO CHOOSE?</h2>
+        <p style="color:rgba(255,255,255,0.68);" class="text-lg mb-10">Tell your project contact which option you prefer: A, B, or C. Mixing is welcome too, for example the tabs layout with the accordion's one-line previews.</p>
+        <div class="flex flex-wrap justify-center gap-3">
+          <a href="../../services/" class="btn-ghost" target="_blank" rel="noopener">Preview A <span class="visually-hidden">(opens in a new tab)</span></a>
+          <a href="accordion.html" class="btn-ghost" target="_blank" rel="noopener">Preview B <span class="visually-hidden">(opens in a new tab)</span></a>
+          <a href="tabs.html" class="btn-ghost" target="_blank" rel="noopener">Preview C <span class="visually-hidden">(opens in a new tab)</span></a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer-bar">
+    <div class="max-w-7xl mx-auto px-6 py-6 flex flex-wrap gap-4 justify-between items-center text-xs" style="color:rgba(255,255,255,0.42);">
+      <img src="../../assets/logo.png" alt="Kool Energy Technology" class="h-8 w-auto" />
+      <span>Private design review. This page isn't linked from the public site.</span>
+    </div>
+  </footer>
+
+</body>
+</html>

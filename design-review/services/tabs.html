@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Services (Tabbed view) — Kool Energy Technology</title>
+  <meta name="robots" content="noindex" />
+  <meta name="theme-color" content="#112581" />
+  <link rel="icon" href="../../assets/favicon.ico" sizes="any" />
+  <link rel="icon" type="image/png" href="../../assets/favicon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            display: ['"Manrope"', 'sans-serif'],
+            sans:    ['"Inter"',   'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <script defer src="../../assets/a11y.js"></script>
+  <link rel="stylesheet" href="../../assets/style.css" />
+  <link rel="stylesheet" href="views.css" />
+  <style>
+    .tabs-layout {
+      display: grid;
+      grid-template-columns: 21rem minmax(0, 1fr);
+      gap: 4rem;
+      align-items: start;
+      padding: 4.5rem 0 6rem;
+    }
+    .tabs-rail {
+      position: sticky;
+      top: 6rem;
+    }
+    .tabs-rail-label { margin-bottom: 1rem; }
+    .tablist {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+      padding: 0.5rem;
+      background: var(--surface-low);
+      border-radius: 0.375rem;
+    }
+    .tab {
+      display: grid;
+      grid-template-columns: 2.25rem minmax(0, 1fr) 1rem;
+      align-items: center;
+      gap: 0.85rem;
+      padding: 1rem;
+      text-align: left;
+      background: transparent;
+      border: 0;
+      border-radius: 0.25rem;
+      cursor: pointer;
+      transition: background 0.25s ease, box-shadow 0.3s ease;
+    }
+    .tab:hover { background: var(--surface-high); }
+    .tab:focus-visible { outline: 2px solid var(--secondary); outline-offset: 2px; }
+    .tab-num {
+      font-family: 'Manrope', sans-serif;
+      font-weight: 800;
+      font-size: 1.05rem;
+      letter-spacing: -0.02em;
+      color: rgba(17, 37, 129, 0.38);
+      transition: color 0.25s ease;
+    }
+    .tab-title {
+      display: block;
+      font-family: 'Manrope', sans-serif;
+      font-weight: 700;
+      font-size: 0.95rem;
+      letter-spacing: 0.01em;
+      line-height: 1.25;
+      text-transform: uppercase;
+      color: var(--on-surface);
+      transition: color 0.25s ease;
+    }
+    .tab-overline {
+      display: block;
+      margin-top: 0.25rem;
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--on-surface-muted);
+      transition: color 0.25s ease;
+    }
+    .tab-arrow {
+      width: 1rem;
+      height: 1rem;
+      color: #fff;
+      opacity: 0;
+      transform: translateX(-6px);
+      transition: opacity 0.3s ease, transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .tab[aria-selected="true"] {
+      background: var(--primary);
+      box-shadow: 0 12px 24px rgba(17, 37, 129, 0.22);
+    }
+    .tab[aria-selected="true"] .tab-num { color: rgba(255, 255, 255, 0.55); }
+    .tab[aria-selected="true"] .tab-title { color: #fff; }
+    .tab[aria-selected="true"] .tab-overline { color: rgba(255, 255, 255, 0.62); }
+    .tab[aria-selected="true"] .tab-arrow { opacity: 1; transform: none; }
+
+    .tabs-rail-note {
+      margin-top: 1.5rem;
+      padding: 0 0.5rem;
+      font-size: 0.85rem;
+      line-height: 1.6;
+      color: var(--on-surface-muted);
+    }
+    .tabs-rail-note a { color: var(--secondary); font-weight: 600; text-decoration: none; }
+    .tabs-rail-note a:hover { text-decoration: underline; }
+
+    .tab-panel { scroll-margin-top: 6rem; }
+    .tab-panel:focus { outline: none; }
+    @media (prefers-reduced-motion: no-preference) {
+      .tab-panel { animation: tab-panel-in 0.5s cubic-bezier(0.22, 1, 0.36, 1) both; }
+      .tab-panel .tab-content { animation: tab-panel-in 0.6s 0.06s cubic-bezier(0.22, 1, 0.36, 1) both; }
+    }
+    @keyframes tab-panel-in {
+      from { opacity: 0; transform: translateY(10px); }
+      to   { opacity: 1; transform: none; }
+    }
+
+    .tab-media.svc-visual { aspect-ratio: 16 / 9; }
+    .tab-media-count {
+      position: absolute;
+      z-index: 2;
+      left: 1.75rem;
+      bottom: 1.5rem;
+      display: flex;
+      align-items: baseline;
+      gap: 0.4rem;
+      font-family: 'Manrope', sans-serif;
+      font-weight: 800;
+      color: #fff;
+      line-height: 1;
+    }
+    .tab-media-count strong { font-size: 3.25rem; letter-spacing: -0.04em; }
+    .tab-media-count span { font-size: 0.95rem; color: rgba(255, 255, 255, 0.6); letter-spacing: 0.04em; }
+
+    .tab-content { padding-top: 2.75rem; }
+    .tab-content .h-section { margin-bottom: 1rem; }
+    .tab-detail {
+      display: grid;
+      grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+      gap: 2.5rem;
+      align-items: start;
+    }
+    .tab-lede {
+      font-size: 1.02rem;
+      line-height: 1.75;
+      color: var(--on-surface-variant);
+      text-wrap: pretty;
+    }
+    .tab-included-box {
+      background: var(--surface-low);
+      border-radius: 0.375rem;
+      padding: 1.5rem 1.75rem;
+    }
+    .tab-included-box .svc-included { grid-template-columns: 1fr; }
+
+    .tab-actions {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+      margin-top: 2.75rem;
+      padding-top: 1.75rem;
+      border-top: 1px solid var(--outline-variant);
+    }
+    .tab-next {
+      display: inline-flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 0.25rem;
+      background: none;
+      border: 0;
+      border-radius: 0.375rem;
+      text-align: right;
+      cursor: pointer;
+    }
+    .tab-next-label {
+      display: block;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--on-surface-muted);
+      margin-bottom: 0.2rem;
+    }
+    .tab-next-name {
+      display: block;
+      font-family: 'Manrope', sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+      text-transform: uppercase;
+      color: var(--on-surface);
+    }
+    .tab-next-box {
+      display: grid;
+      place-items: center;
+      width: 2.75rem;
+      height: 2.75rem;
+      border-radius: 0.375rem;
+      background: var(--primary);
+      color: #fff;
+      transition: background 0.25s ease, transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .tab-next-box svg { width: 1.1rem; height: 1.1rem; }
+    .tab-next:hover .tab-next-box { background: var(--secondary); transform: translateX(3px); }
+    .tab-next:focus-visible { outline: 2px solid var(--secondary); outline-offset: 2px; }
+
+    @media (max-width: 1279px) {
+      .tabs-layout { grid-template-columns: 18rem minmax(0, 1fr); gap: 3rem; }
+      .tab-detail { grid-template-columns: 1fr; gap: 1.75rem; }
+    }
+    @media (max-width: 1023px) {
+      .tabs-layout { grid-template-columns: minmax(0, 1fr); gap: 2rem; padding: 2.5rem 0 4rem; }
+      .tabs-rail { position: static; margin: 0 -1.5rem; }
+      .tabs-rail-label, .tabs-rail-note { padding: 0 1.5rem; }
+      .tabs-rail-note { display: none; }
+      .tablist {
+        flex-direction: row;
+        gap: 0.5rem;
+        padding: 0.25rem 1.5rem 0.75rem;
+        background: none;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        scroll-padding-inline: 1.5rem;
+        scrollbar-width: none;
+      }
+      .tablist::-webkit-scrollbar { display: none; }
+      .tab {
+        flex: 0 0 auto;
+        grid-template-columns: auto auto;
+        gap: 0.6rem;
+        padding: 0.8rem 1.1rem;
+        background: var(--surface-low);
+        white-space: nowrap;
+        scroll-snap-align: start;
+      }
+      .tab-overline, .tab-arrow { display: none; }
+      .tab-media-count strong { font-size: 2.5rem; }
+    }
+    @media (max-width: 640px) {
+      .tab-media.svc-visual { aspect-ratio: 4 / 3; }
+      .tab-media-count { left: 1.1rem; bottom: 1rem; }
+      .tab-content { padding-top: 2rem; }
+      .tab-included-box { padding: 1.25rem; }
+      .tab-actions { flex-direction: column; align-items: flex-start; }
+      .tab-next { text-align: left; flex-direction: row-reverse; }
+    }
+  </style>
+  <script>
+    function servicesTabs() {
+      return {
+        tabs: [
+          { id: 'air-conditioning', name: 'Air Conditioning' },
+          { id: 'heating-systems', name: 'Heating Systems' },
+          { id: 'indoor-air-quality', name: 'Indoor Air Quality' },
+          { id: 'ductless-mini-splits', name: 'Ductless Mini Splits' },
+          { id: 'preventative-maintenance', name: 'Preventative Maintenance' },
+          { id: 'temperature-control', name: 'Temperature Control Solutions' }
+        ],
+        active: 'air-conditioning',
+        vertical: true,
+        init() {
+          var self = this;
+          var wide = window.matchMedia('(min-width: 1024px)');
+          this.vertical = wide.matches;
+          wide.addEventListener('change', function (e) { self.vertical = e.matches; });
+          this.selectFromHash(false);
+        },
+        indexOf(id) {
+          return this.tabs.findIndex(function (t) { return t.id === id; });
+        },
+        nextOf(id) {
+          return this.tabs[(this.indexOf(id) + 1) % this.tabs.length];
+        },
+        select(id) {
+          this.active = id;
+          history.replaceState(null, '', '#' + id);
+          this.$nextTick(() => this.revealActiveTab());
+        },
+        revealActiveTab() {
+          if (this.vertical) return;
+          var tab = document.getElementById('tab-' + this.active);
+          tab.parentElement.scrollTo({ left: tab.offsetLeft - 24, behavior: 'smooth' });
+        },
+        selectFromHash(scroll) {
+          var id = decodeURIComponent(location.hash.slice(1));
+          if (this.indexOf(id) === -1) return;
+          this.active = id;
+          this.$nextTick(() => {
+            this.revealActiveTab();
+            if (scroll) this.scrollToPanels();
+          });
+        },
+        scrollToPanels() {
+          var target = this.vertical ? document.getElementById(this.active) : this.$refs.rail;
+          var top = target.getBoundingClientRect().top + window.scrollY - 96;
+          window.scrollTo({ top: top, behavior: 'smooth' });
+        },
+        onKey(e) {
+          var i = this.indexOf(this.active);
+          var last = this.tabs.length - 1;
+          var map = { ArrowDown: i + 1, ArrowRight: i + 1, ArrowUp: i - 1, ArrowLeft: i - 1, Home: 0, End: last };
+          if (!(e.key in map)) return;
+          e.preventDefault();
+          var n = map[e.key];
+          if (n > last) n = 0;
+          if (n < 0) n = last;
+          var id = this.tabs[n].id;
+          this.select(id);
+          this.$nextTick(() => document.getElementById('tab-' + id).focus());
+        },
+        goNext() {
+          var id = this.nextOf(this.active).id;
+          this.select(id);
+          this.$nextTick(() => requestAnimationFrame(() => {
+            var panel = document.getElementById(id);
+            var btn = panel.querySelector('.tab-next');
+            if (btn) btn.focus({ preventScroll: true });
+            if (panel.getBoundingClientRect().top < 80) this.scrollToPanels();
+          }));
+        }
+      };
+    }
+  </script>
+</head>
+<body class="font-sans">
+
+  <!-- NAV -->
+  <header class="nav-bar" x-data="{ open: false }">
+    <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+      <a href="../../" class="shrink-0">
+        <img src="../../assets/logo.png" alt="Kool Energy Technology" class="h-9 w-auto" />
+      </a>
+      <nav class="hidden md:flex items-center gap-5 lg:gap-6 xl:gap-8">
+        <a href="../../" class="nav-link">Home</a>
+        <div class="nav-dropdown" x-data="{ sub: false }" @pointerenter="if ($event.pointerType === 'mouse') sub = true" @pointerleave="if ($event.pointerType === 'mouse') sub = false" @focusout="if (!$el.contains($event.relatedTarget)) sub = false" @keydown.escape="if (sub) { sub = false; $refs.subToggle.focus() }">
+          <a href="../../services/" class="nav-link active">Services</a>
+          <button type="button" class="nav-dropdown-toggle" x-ref="subToggle" @click="sub = !sub" aria-expanded="false" :aria-expanded="sub.toString()" aria-controls="services-menu" aria-label="Services menu">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 9l6 6 6-6"/></svg>
+          </button>
+          <div id="services-menu" class="nav-dropdown-panel" x-show="sub" x-transition.opacity.duration.150ms x-cloak>
+            <ul class="nav-dropdown-list">
+              <li><a href="#air-conditioning" class="nav-dropdown-item" @click="sub = false"><span class="nav-dropdown-num">01</span>Air Conditioning</a></li>
+              <li><a href="#heating-systems" class="nav-dropdown-item" @click="sub = false"><span class="nav-dropdown-num">02</span>Heating Systems</a></li>
+              <li><a href="#indoor-air-quality" class="nav-dropdown-item" @click="sub = false"><span class="nav-dropdown-num">03</span>Indoor Air Quality</a></li>
+              <li><a href="#ductless-mini-splits" class="nav-dropdown-item" @click="sub = false"><span class="nav-dropdown-num">04</span>Ductless Mini Splits</a></li>
+              <li><a href="#preventative-maintenance" class="nav-dropdown-item" @click="sub = false"><span class="nav-dropdown-num">05</span>Preventative Maintenance</a></li>
+              <li><a href="#temperature-control" class="nav-dropdown-item" @click="sub = false"><span class="nav-dropdown-num">06</span>Temperature Control Solutions</a></li>
+            </ul>
+          </div>
+        </div>
+        <a href="../../about/" class="nav-link">About</a>
+        <a href="../../instagram/" class="nav-link">Instagram</a>
+        <a href="tel:+13477890789" class="btn-cta btn-phone" aria-label="24/7 Service 347-789-0789"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg><span class="lg:hidden">24/7</span><span class="hidden xl:inline">24/7 Service</span><span class="hidden lg:inline">347-789-0789</span></a>
+        <a href="../../service-request/" class="btn-cta">Request Service</a>
+      </nav>
+      <div class="md:hidden flex items-center gap-2">
+        <a href="tel:+13477890789" class="nav-phone-mobile" aria-label="Call 24/7 service at 347-789-0789"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg><span>24/7</span></a>
+        <button class="p-2" style="color:var(--on-surface-variant);" @click="open = !open" :aria-expanded="open.toString()" aria-controls="mobile-menu" aria-label="Menu">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path x-show="!open" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+            <path x-show="open" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+    <div id="mobile-menu" x-show="open" x-transition x-cloak style="background:var(--surface-low);" class="md:hidden px-6 py-4 space-y-3">
+      <a href="../../" class="block nav-link py-2">Home</a>
+      <div x-data="{ sub: false }">
+        <div class="flex items-center justify-between">
+          <a href="../../services/" class="block nav-link py-2">Services</a>
+          <button type="button" class="nav-dropdown-toggle mobile-subnav-toggle" @click="sub = !sub" aria-expanded="false" :aria-expanded="sub.toString()" aria-controls="mobile-services-menu" aria-label="Services menu">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 9l6 6 6-6"/></svg>
+          </button>
+        </div>
+        <ul id="mobile-services-menu" class="mobile-subnav" x-show="sub" x-transition x-cloak>
+          <li><a href="#air-conditioning" class="mobile-subnav-item" @click="open = false"><span class="nav-dropdown-num">01</span>Air Conditioning</a></li>
+          <li><a href="#heating-systems" class="mobile-subnav-item" @click="open = false"><span class="nav-dropdown-num">02</span>Heating Systems</a></li>
+          <li><a href="#indoor-air-quality" class="mobile-subnav-item" @click="open = false"><span class="nav-dropdown-num">03</span>Indoor Air Quality</a></li>
+          <li><a href="#ductless-mini-splits" class="mobile-subnav-item" @click="open = false"><span class="nav-dropdown-num">04</span>Ductless Mini Splits</a></li>
+          <li><a href="#preventative-maintenance" class="mobile-subnav-item" @click="open = false"><span class="nav-dropdown-num">05</span>Preventative Maintenance</a></li>
+          <li><a href="#temperature-control" class="mobile-subnav-item" @click="open = false"><span class="nav-dropdown-num">06</span>Temperature Control Solutions</a></li>
+        </ul>
+      </div>
+      <a href="../../about/" class="block nav-link py-2">About</a>
+      <a href="../../instagram/" class="block nav-link py-2">Instagram</a>
+      <a href="../../service-request/" class="btn-cta block text-center mt-4">Request Service</a>
+      <a href="tel:+13477890789" class="btn-cta btn-phone flex w-full"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>24/7 Service: 347-789-0789</a>
+    </div>
+  </header>
+
+  <!-- PAGE HERO -->
+  <section class="page-hero">
+    <div class="page-hero-inner max-w-7xl mx-auto">
+      <span class="overline-label-light">What We Offer</span>
+      <h1 class="h-page">
+        OUR SERVICES
+      </h1>
+      <p class="mt-4 max-w-xl text-base" style="color:rgba(255,255,255,0.6);">
+        Full-spectrum HVAC for New York businesses and homes, led by decades of commercial work. Every job handled by licensed, EPA-certified technicians.
+      </p>
+    </div>
+  </section>
+
+  <!-- SERVICES TABS -->
+  <section style="background:var(--surface);" x-data="servicesTabs()" @hashchange.window="selectFromHash(true)">
+    <div class="max-w-7xl mx-auto px-6 tabs-layout">
+
+      <div class="tabs-rail" x-ref="rail">
+        <span class="overline-label tabs-rail-label">6 Services</span>
+        <div class="tablist" role="tablist" aria-label="Services" aria-orientation="vertical" :aria-orientation="vertical ? 'vertical' : 'horizontal'" @keydown="onKey($event)">
+          <button type="button" role="tab" class="tab" id="tab-air-conditioning" aria-controls="air-conditioning" aria-selected="true" :aria-selected="(active === 'air-conditioning').toString()" tabindex="0" :tabindex="active === 'air-conditioning' ? 0 : -1" @click="select('air-conditioning')">
+            <span class="tab-num">01</span>
+            <span><span class="tab-title">Air Conditioning</span><span class="tab-overline">Installation &amp; Replacement</span></span>
+            <svg class="tab-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.25" d="M9 6l6 6-6 6"/></svg>
+          </button>
+          <button type="button" role="tab" class="tab" id="tab-heating-systems" aria-controls="heating-systems" aria-selected="false" :aria-selected="(active === 'heating-systems').toString()" tabindex="-1" :tabindex="active === 'heating-systems' ? 0 : -1" @click="select('heating-systems')">
+            <span class="tab-num">02</span>
+            <span><span class="tab-title">Heating Systems</span><span class="tab-overline">Commercial Heating</span></span>
+            <svg class="tab-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.25" d="M9 6l6 6-6 6"/></svg>
+          </button>
+          <button type="button" role="tab" class="tab" id="tab-indoor-air-quality" aria-controls="indoor-air-quality" aria-selected="false" :aria-selected="(active === 'indoor-air-quality').toString()" tabindex="-1" :tabindex="active === 'indoor-air-quality' ? 0 : -1" @click="select('indoor-air-quality')">
+            <span class="tab-num">03</span>
+            <span><span class="tab-title">Indoor Air Quality</span><span class="tab-overline">Ventilation &amp; Filtration</span></span>
+            <svg class="tab-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.25" d="M9 6l6 6-6 6"/></svg>
+          </button>
+          <button type="button" role="tab" class="tab" id="tab-ductless-mini-splits" aria-controls="ductless-mini-splits" aria-selected="false" :aria-selected="(active === 'ductless-mini-splits').toString()" tabindex="-1" :tabindex="active === 'ductless-mini-splits' ? 0 : -1" @click="select('ductless-mini-splits')">
+            <span class="tab-num">04</span>
+            <span><span class="tab-title">Ductless Mini Splits</span><span class="tab-overline">Zone-Specific Cooling</span></span>
+            <svg class="tab-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.25" d="M9 6l6 6-6 6"/></svg>
+          </button>
+          <button type="button" role="tab" class="tab" id="tab-preventative-maintenance" aria-controls="preventative-maintenance" aria-selected="false" :aria-selected="(active === 'preventative-maintenance').toString()" tabindex="-1" :tabindex="active === 'preventative-maintenance' ? 0 : -1" @click="select('preventative-maintenance')">
+            <span class="tab-num">05</span>
+            <span><span class="tab-title">Preventative Maintenance</span><span class="tab-overline">Service Contracts</span></span>
+            <svg class="tab-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.25" d="M9 6l6 6-6 6"/></svg>
+          </button>
+          <button type="button" role="tab" class="tab" id="tab-temperature-control" aria-controls="temperature-control" aria-selected="false" :aria-selected="(active === 'temperature-control').toString()" tabindex="-1" :tabindex="active === 'temperature-control' ? 0 : -1" @click="select('temperature-control')">
+            <span class="tab-num">06</span>
+            <span><span class="tab-title">Temperature Control</span><span class="tab-overline">Specialty Applications</span></span>
+            <svg class="tab-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.25" d="M9 6l6 6-6 6"/></svg>
+          </button>
+        </div>
+        <p class="tabs-rail-note">Not sure which service fits your building? Call our 24/7 line at <a href="tel:+13477890789">347-789-0789</a>.</p>
+      </div>
+
+      <div>
+
+        <!-- 01 Air Conditioning -->
+        <div class="tab-panel" role="tabpanel" id="air-conditioning" aria-labelledby="tab-air-conditioning" tabindex="-1" x-show="active === 'air-conditioning'">
+          <div class="svc-visual tab-media">
+            <img src="../../assets/kool-energy-tech-field-work-2.jpeg" alt="Kool Energy technician servicing a rooftop air conditioning unit" style="object-position: center 35%;" />
+            <p class="tab-media-count" aria-hidden="true"><strong>01</strong><span>/ 06</span></p>
+          </div>
+          <div class="tab-content">
+            <span class="overline-label">Installation &amp; Replacement</span>
+            <h2 class="h-section">AIR CONDITIONING</h2>
+            <span class="section-rule"></span>
+            <div class="tab-detail">
+              <p class="tab-lede">Commercial AC systems demand precision engineering and industrial-grade equipment. We install, replace, and upgrade central air for office buildings, retail, warehouses, and multi-unit properties — and apply that same standard to homes throughout New York.</p>
+              <div class="tab-included-box">
+                <span class="svc-included-label">What's included</span>
+                <ul class="svc-included">
+                  <li>Central air system installation &amp; replacement</li>
+                  <li>Rooftop unit (RTU) service &amp; installation</li>
+                  <li>Multi-zone commercial system design</li>
+                  <li>Energy-efficiency upgrades &amp; audits</li>
+                </ul>
+              </div>
+            </div>
+            <div class="tab-actions">
+              <a href="../../service-request/" class="svc-link">Request air conditioning service <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+              <button type="button" class="tab-next" @click="goNext()">
+                <span><span class="tab-next-label">Next service</span><span class="tab-next-name">Heating Systems</span></span>
+                <span class="tab-next-box" aria-hidden="true"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.25" d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 02 Heating -->
+        <div class="tab-panel" role="tabpanel" id="heating-systems" aria-labelledby="tab-heating-systems" tabindex="-1" x-show="active === 'heating-systems'" style="display:none;">
+          <div class="svc-visual tab-media">
+            <img src="../../assets/kool-energy-tech-field-work-3.jpeg" alt="Technician testing HVAC equipment in a mechanical room" />
+            <p class="tab-media-count" aria-hidden="true"><strong>02</strong><span>/ 06</span></p>
+          </div>
+          <div class="tab-content">
+            <span class="overline-label">Commercial Heating</span>
+            <h2 class="h-section">HEATING SYSTEMS</h2>
+            <span class="section-rule"></span>
+            <div class="tab-detail">
+              <p class="tab-lede">New York winters are unforgiving on any building. We design and install heating for commercial-scale thermal loads — cold storage, server rooms, high-occupancy spaces — and the same reliable systems for homes.</p>
+              <div class="tab-included-box">
+                <span class="svc-included-label">What's included</span>
+                <ul class="svc-included">
+                  <li>Commercial heat pump installation</li>
+                  <li>Gas furnace systems for large spaces</li>
+                  <li>Heat strip &amp; auxiliary heating solutions</li>
+                  <li>Zoned heating for mixed-use buildings</li>
+                </ul>
+              </div>
+            </div>
+            <div class="tab-actions">
+              <a href="../../service-request/" class="svc-link">Request heating service <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+              <button type="button" class="tab-next" @click="goNext()">
+                <span><span class="tab-next-label">Next service</span><span class="tab-next-name">Indoor Air Quality</span></span>
+                <span class="tab-next-box" aria-hidden="true"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.25" d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 03 Indoor Air Quality -->
+        <div class="tab-panel" role="tabpanel" id="indoor-air-quality" aria-labelledby="tab-indoor-air-quality" tabindex="-1" x-show="active === 'indoor-air-quality'" style="display:none;">
+          <div class="svc-visual tab-media">
+            <img src="../../assets/kool-energy-tech-field-work-1.jpeg" alt="Technician installing insulated ductwork for ventilation" />
+            <p class="tab-media-count" aria-hidden="true"><strong>03</strong><span>/ 06</span></p>
+          </div>
+          <div class="tab-content">
+            <span class="overline-label">Ventilation &amp; Filtration</span>
+            <h2 class="h-section">INDOOR AIR QUALITY</h2>
+            <span class="section-rule"></span>
+            <div class="tab-detail">
+              <p class="tab-lede">Clean air is a compliance issue and a business asset. We assess, design, and implement IAQ systems that reduce allergens, control humidity, and meet ASHRAE and OSHA standards — keeping occupants healthy and buildings code-compliant, at work and at home.</p>
+              <div class="tab-included-box">
+                <span class="svc-included-label">What's included</span>
+                <ul class="svc-included">
+                  <li>HEPA &amp; commercial filtration systems</li>
+                  <li>UV air purification &amp; ionization</li>
+                  <li>Humidity control &amp; dehumidification</li>
+                  <li>Ventilation design &amp; ductwork assessment</li>
+                </ul>
+              </div>
+            </div>
+            <div class="tab-actions">
+              <a href="../../service-request/" class="svc-link">Request an air quality assessment <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+              <button type="button" class="tab-next" @click="goNext()">
+                <span><span class="tab-next-label">Next service</span><span class="tab-next-name">Ductless Mini Splits</span></span>
+                <span class="tab-next-box" aria-hidden="true"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.25" d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 04 Mini Splits -->
+        <div class="tab-panel" role="tabpanel" id="ductless-mini-splits" aria-labelledby="tab-ductless-mini-splits" tabindex="-1" x-show="active === 'ductless-mini-splits'" style="display:none;">
+          <div class="svc-visual tab-media">
+            <img src="../../assets/kool-energy-tech-field-work-5.jpeg" alt="Crew installing a commercial HVAC unit on a New York rooftop" />
+            <p class="tab-media-count" aria-hidden="true"><strong>04</strong><span>/ 06</span></p>
+          </div>
+          <div class="tab-content">
+            <span class="overline-label">Zone-Specific Cooling</span>
+            <h2 class="h-section">DUCTLESS MINI SPLITS</h2>
+            <span class="section-rule"></span>
+            <div class="tab-detail">
+              <p class="tab-lede">When ductwork isn't practical or a space has unique temperature requirements, ductless mini-split systems deliver precise, efficient climate control without the infrastructure overhead. Ideal for server rooms, showrooms, additions, retrofits, and homes.</p>
+              <div class="tab-included-box">
+                <span class="svc-included-label">What's included</span>
+                <ul class="svc-included">
+                  <li>Single and multi-zone systems</li>
+                  <li>VRF/VRV commercial systems</li>
+                  <li>Ceiling cassette &amp; concealed duct units</li>
+                  <li>Server room &amp; IT closet climate control</li>
+                </ul>
+              </div>
+            </div>
+            <div class="tab-actions">
+              <a href="../../service-request/" class="svc-link">Request a mini split quote <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+              <button type="button" class="tab-next" @click="goNext()">
+                <span><span class="tab-next-label">Next service</span><span class="tab-next-name">Preventative Maintenance</span></span>
+                <span class="tab-next-box" aria-hidden="true"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.25" d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 05 Preventative Maintenance -->
+        <div class="tab-panel" role="tabpanel" id="preventative-maintenance" aria-labelledby="tab-preventative-maintenance" tabindex="-1" x-show="active === 'preventative-maintenance'" style="display:none;">
+          <div class="svc-visual tab-media">
+            <img src="../../assets/kool-energy-tech-field-work-6.jpeg" alt="Technician cleaning coils on a commercial outdoor HVAC unit" style="object-position: center top;" />
+            <p class="tab-media-count" aria-hidden="true"><strong>05</strong><span>/ 06</span></p>
+          </div>
+          <div class="tab-content">
+            <span class="overline-label">Service Contracts</span>
+            <h2 class="h-section">PREVENTATIVE MAINTENANCE</h2>
+            <span class="section-rule"></span>
+            <div class="tab-detail">
+              <p class="tab-lede">Unplanned downtime is expensive. Our scheduled maintenance keeps HVAC systems running at peak efficiency year-round — reducing emergency repairs, extending equipment life, and keeping spaces comfortable for tenants, employees, and families.</p>
+              <div class="tab-included-box">
+                <span class="svc-included-label">What's included</span>
+                <ul class="svc-included">
+                  <li>Quarterly &amp; bi-annual service contracts</li>
+                  <li>Filter replacement &amp; coil cleaning</li>
+                  <li>Refrigerant level checks &amp; top-offs</li>
+                  <li>Full system diagnostics &amp; reports</li>
+                </ul>
+              </div>
+            </div>
+            <div class="tab-actions">
+              <a href="../../service-request/" class="svc-link">Set up a maintenance plan <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+              <button type="button" class="tab-next" @click="goNext()">
+                <span><span class="tab-next-label">Next service</span><span class="tab-next-name">Temperature Control</span></span>
+                <span class="tab-next-box" aria-hidden="true"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.25" d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 06 Temperature Control -->
+        <div class="tab-panel" role="tabpanel" id="temperature-control" aria-labelledby="tab-temperature-control" tabindex="-1" x-show="active === 'temperature-control'" style="display:none;">
+          <div class="svc-visual tab-media">
+            <img src="../../assets/kool-energy-tech-field-work-4.jpeg" alt="WhisperKOOL Platinum Split wine cellar temperature control unit" />
+            <p class="tab-media-count" aria-hidden="true"><strong>06</strong><span>/ 06</span></p>
+          </div>
+          <div class="tab-content">
+            <span class="overline-label">Specialty Applications</span>
+            <h2 class="h-section">TEMPERATURE CONTROL SOLUTIONS</h2>
+            <span class="section-rule"></span>
+            <div class="tab-detail">
+              <p class="tab-lede">Some applications demand precise, narrow temperature tolerances. We design and install specialty climate systems for wine storage, pharmaceutical cold rooms, restaurant walk-in coolers, and data center cooling — anywhere standard HVAC falls short.</p>
+              <div class="tab-included-box">
+                <span class="svc-included-label">What's included</span>
+                <ul class="svc-included">
+                  <li>Wine cellar &amp; beverage storage systems</li>
+                  <li>Walk-in cooler &amp; freezer climate systems</li>
+                  <li>Data center precision cooling</li>
+                  <li>Pharmaceutical &amp; laboratory environments</li>
+                </ul>
+              </div>
+            </div>
+            <div class="tab-actions">
+              <a href="../../service-request/" class="svc-link">Request a specialty consultation <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+              <button type="button" class="tab-next" @click="goNext()">
+                <span><span class="tab-next-label">Back to start</span><span class="tab-next-name">Air Conditioning</span></span>
+                <span class="tab-next-box" aria-hidden="true"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.25" d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA BANNER -->
+  <section class="cta-section">
+    <div class="max-w-3xl mx-auto text-center relative z-10">
+      <h2 class="h-cta mb-4">NEED A SERVICE QUOTE?</h2>
+      <p style="color:rgba(255,255,255,0.6);" class="text-lg mb-10">Submit a service request and a specialist will reach out within one business day.</p>
+      <a href="../../service-request/" class="btn-cta">Request Service</a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer-bar">
+    <div class="max-w-7xl mx-auto px-6 py-14 grid md:grid-cols-4 gap-10">
+      <div>
+        <img src="../../assets/logo.png" alt="Kool Energy Technology" class="h-10 w-auto mb-4" />
+        <p class="text-sm leading-relaxed" style="color:rgba(255,255,255,0.42);">New York HVAC specialists with deep commercial experience. Serving the Tri-State Area.</p>
+      </div>
+      <div>
+        <h4 class="footer-heading">Quick Links</h4>
+        <ul class="space-y-2">
+          <li><a href="../../" class="footer-link">Home</a></li>
+          <li><a href="../../services/" class="footer-link">Services</a></li>
+          <li><a href="../../about/" class="footer-link">About</a></li>
+          <li><a href="../../instagram/" class="footer-link">Instagram</a></li>
+          <li><a href="../../service-request/" class="footer-link">Request Service</a></li>
+          <li><a href="https://k1gv00-g8.myshopify.com" class="footer-link" target="_blank" rel="noopener">Equipment Store</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="footer-heading">Legal</h4>
+        <ul class="space-y-2">
+          <li><a href="../../terms-and-conditions/" class="footer-link">Terms and Conditions</a></li>
+          <li><a href="../../privacy-policy/" class="footer-link">Privacy Policy</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="footer-heading">Contact</h4>
+        <ul class="space-y-2 text-sm" style="color:rgba(255,255,255,0.42);">
+          <li>New York Service Area</li>
+          <li>Serving the Tri-State Area</li>
+          <li class="pt-2"><a href="tel:+13477890789" class="btn-cta btn-phone"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>24/7 Service: 347-789-0789</a></li>
+        </ul>
+      </div>
+    </div>
+    <div style="border-top:1px solid rgba(255,255,255,0.07);">
+      <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center text-xs" style="color:rgba(255,255,255,0.28);">
+        <span>&copy; 2026 Kool Energy Technology. All rights reserved.</span>
+        <span>Licensed Commercial HVAC Contractor</span>
+      </div>
+    </div>
+  </footer>
+
+  <nav class="view-switcher" aria-label="Services layout preview">
+    <a href="./" class="view-switcher-back">← Review</a>
+    <a href="../../services/">Current</a>
+    <a href="accordion.html">Accordion</a>
+    <a href="tabs.html" aria-current="page">Tabs</a>
+  </nav>
+
+</body>
+</html>
