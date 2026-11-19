@@ -791,7 +791,6 @@ body {
   overflow-x: auto;
   overflow-y: hidden;
   scroll-snap-type: x mandatory;
-  scroll-behavior: smooth;
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
   outline: none;
@@ -952,10 +951,6 @@ body {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .reviews-viewport {
-    scroll-behavior: auto;
-  }
-
   .review-card:hover {
     transform: none;
   }
