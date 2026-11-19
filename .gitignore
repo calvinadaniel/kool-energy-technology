@@ -15,6 +15,10 @@ transformation/
 # Design exploration (not shipped)
 design-demos/
 
+# Draft pages held for client review (not on GitHub Pages)
+financing/
+hvac-terms/
+
 # Internal planning docs
 docs/
 
