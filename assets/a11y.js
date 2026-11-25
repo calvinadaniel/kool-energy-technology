@@ -1,21 +1,4 @@
 (function () {
-  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-
-  function applyReducedMotionVideo() {
-    var videos = document.querySelectorAll('.hero-video');
-    var i;
-    for (i = 0; i < videos.length; i++) {
-      if (reduceMotion.matches) {
-        videos[i].pause();
-        videos[i].removeAttribute('autoplay');
-        videos[i].currentTime = 0;
-      } else if (videos[i].paused) {
-        videos[i].setAttribute('autoplay', '');
-        videos[i].play().catch(function () {});
-      }
-    }
-  }
-
   function restoreFocus() {
     var heading = document.querySelector('h1');
     if (!heading) return;
@@ -69,7 +52,6 @@
 
   function onBoostedSwap(event) {
     if (!isBoostedBodySwap(event)) return;
-    applyReducedMotionVideo();
     if (!swapAnchor(event)) restoreFocus();
     announceRoute();
   }
@@ -86,13 +68,7 @@
 
   document.addEventListener('htmx:afterSwap', onBoostedSwap);
   document.addEventListener('htmx:afterSettle', onBoostedSettle);
-  document.addEventListener('DOMContentLoaded', applyReducedMotionVideo);
   window.addEventListener('load', function () {
     if (location.hash) scrollToAnchor(decodeURIComponent(location.hash.slice(1)));
   });
-  if (typeof reduceMotion.addEventListener === 'function') {
-    reduceMotion.addEventListener('change', applyReducedMotionVideo);
-  } else if (typeof reduceMotion.addListener === 'function') {
-    reduceMotion.addListener(applyReducedMotionVideo);
-  }
 })();

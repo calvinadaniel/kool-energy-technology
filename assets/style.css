@@ -481,7 +481,7 @@ body {
   mask-image: linear-gradient(to right, transparent 0%, black 28%);
   z-index: 1;
 }
-.hero-video {
+.hero-media {
   position: absolute;
   inset: 0;
   width: 100%;
@@ -535,7 +535,7 @@ body {
     mask-image: none;
     z-index: 0;
   }
-  .hero-video {
+  .hero-media {
     opacity: 0.42;
   }
   .hero-img-panel::after {
@@ -1590,12 +1590,6 @@ body {
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;
   border: 0;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .hero-video {
-    display: none;
-  }
 }
 
 @media (prefers-reduced-motion: no-preference) {
