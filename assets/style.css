@@ -977,6 +977,27 @@ body {
   font-size: 0.85rem;
   padding: 0.9rem 2.5rem;
 }
+.cta-lead {
+  color: rgba(255, 255, 255, 0.6);
+  font-family: 'Inter', sans-serif;
+  font-size: 1.125rem;
+  font-weight: 400;
+  line-height: 1.75rem;
+}
+.cta-finance {
+  margin: 2.5rem auto 0;
+  max-width: 36rem;
+}
+.cta-finance .cta-lead { margin: 0; }
+.cta-finance-partners {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem;
+  margin: 1.25rem 0 0;
+  padding: 0;
+  list-style: none;
+}
 
 /* ─── Why Choose Us (home, on the navy CTA band) ─── */
 .why-choose-header {
@@ -1499,7 +1520,6 @@ body {
   padding: 0;
   list-style: none;
 }
-
 .partner-badge {
   margin-top: 1.5rem;
   background: var(--surface-lowest);
