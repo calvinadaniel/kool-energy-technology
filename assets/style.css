@@ -1481,6 +1481,7 @@ body {
 }
 .finance-pending {
   margin-top: 1.5rem;
+  margin-bottom: 1.25rem;
   padding: 1.25rem 1.4rem;
   background: var(--surface-lowest);
   border-left: 3px solid var(--primary);
@@ -1488,6 +1489,15 @@ body {
   box-shadow: var(--shadow-sm);
   color: var(--on-surface-variant);
   line-height: 1.6;
+}
+.finance-pending p { margin: 0; }
+.finance-partners {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin: 1rem 0 0;
+  padding: 0;
+  list-style: none;
 }
 
 .partner-badge {
