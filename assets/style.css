@@ -1267,6 +1267,12 @@ body {
   box-shadow: var(--shadow-sm);
   overflow: hidden;
 }
+.svc-visual-wide {
+  aspect-ratio: 2064 / 768;
+}
+.svc-visual img.frame-lower {
+  object-position: center 34%;
+}
 .svc-visual img {
   position: absolute;
   inset: 0;
@@ -1295,6 +1301,10 @@ body {
 .svc-visual:hover img {
   filter: saturate(0.7) contrast(1.1) brightness(1);
   transform: scale(1.05);
+}
+.svc-visual.svc-visual-wide img,
+.svc-visual.svc-visual-wide:hover img {
+  transform: none;
 }
 .svc-visual:hover::after {
   opacity: 0.55;
